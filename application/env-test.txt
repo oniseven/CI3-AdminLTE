@@ -1,0 +1,7 @@
+# default group database config
+DB_HOST=''
+DB_NAME='db_cignadlte'
+DB_USER='root'
+DB_PASS=
+DB_DRIVER='mysqli'
+DB_PORT=3306
