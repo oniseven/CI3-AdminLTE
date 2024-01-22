@@ -4,17 +4,17 @@ Cignadlte is combining CodeIgniter 3, a renowned PHP framework, with AdminLTE 3.
 
 ## Server Requirements
 
-PHP version 5.6 or newer is recommended.
-
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
+- PHP version 5.6 or newer is recommended. (Testing in PHP 7)
+- MySQL Server. (Testing in MariaDB 10.5.4)
+- Composer.
 
 ## Installations
 
+- Clone to your php server, you could use XAMPP or any kind of PHP server.
+- Import the demo database `demo_database_cignadlte.sql` to MySQL database server that you have.
 - Rename `.env-test` in `applications` folder to `.env`, and populate the data according to your database config.
 - In cli/bash run `composer install` it will install dependency from `composer.json`.
-- That's it. You are good to go, open your browser and go to <http://localhost/cignadlte>.
+- That's it. You are good to go, just open your browser and go to <http://localhost/cignadlte>.
 - Have fun.
 
 ## Resources
