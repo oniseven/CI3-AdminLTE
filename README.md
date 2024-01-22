@@ -19,5 +19,5 @@ Cignadlte is combining CodeIgniter 3, a renowned PHP framework, with AdminLTE 3.
 
 ## Resources
 
--  `Codeigniter <https://codeigniter.com/docs>`_
--  `AdminLTE <https://github.com/ColorlibHQ/AdminLTE>`_
+-  Codeigniter <https://codeigniter.com/docs>
+-  AdminLTE <https://github.com/ColorlibHQ/AdminLTE>
