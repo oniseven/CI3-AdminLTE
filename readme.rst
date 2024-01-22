@@ -14,6 +14,15 @@ It should work on 5.3.7 as well, but we strongly advise you NOT to run
 such old versions of PHP, because of potential security and performance
 issues, as well as missing features.
 
+*******************
+Installations
+*******************
+
+- Rename `.env-test` in `applications` folder to `.env`, and populate the data according to your database config.
+- In cli/bash run `composer install` it will install dependency from `composer.json`.
+- That's it. You are good to go, open your browser and go to <http://localhost/cignadlte>.
+- Have fun.
+
 *********
 Resources
 *********
