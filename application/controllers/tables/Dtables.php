@@ -4,15 +4,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Dtables extends CI_Controller {
 	public function index()
 	{
-		$data = [
-			"percobaan" => ""
-		];
-
 		$this->template
-      ->page_title('Datatables')
+			->page_title('Datatables')
       ->plugins(['datatables'])
 			->page_js('assets/dist/js/pages/datatables.js')
-      ->load('tables/datatables', $data);
+      ->load('tables/datatables');
+
+		// $this->template
+		// 	->load('tables/datatables');
 	}
 
 	public function datatable()
@@ -73,7 +72,7 @@ class Dtables extends CI_Controller {
     // $numbering_over and $numbering_row is only for mysql 8++, postgresql, and sql server,
     // it creating auto numbering base on the order
     // if you dont use them then try another approach
-    $numbering_over = ($orderBy) ? "ORDER BY {$orderBy['column']} {$orderBy['dir']}" : "";
+    // $numbering_over = ($orderBy) ? "ORDER BY {$orderBy['column']} {$orderBy['dir']}" : "";
     // $numbering_row = "ROW_NUMBER() OVER({$numbering_over}) as no ";
 		$select = [
       'id', 

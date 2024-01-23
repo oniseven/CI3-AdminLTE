@@ -10,7 +10,7 @@ class Template
    * @var boolean       $breadcrums               On/Off to show breadcrums of the default template, default: true
    * @var boolean       $footer                   On/Off to show footer of the default template, default: true
    * @var string        $page_title               Page title
-   * @var array|string  $page_title               Custom page javascript
+   * @var array|string  $page_js                  Custom page javascript
    * @var integer       $privilege_id             User privilege id
    * @var object        $setting                  App setting variable from App_setting library
    * @var object        $profile                  Company Profile value from App_setting library using get function with "profile" key
@@ -83,7 +83,7 @@ class Template
    * 
    * @return object
    */
-  public function hide_breadcrumsr() {
+  public function hide_breadcrums() {
     $this->breadcrums = false;
     return $this;
   }

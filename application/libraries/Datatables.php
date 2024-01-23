@@ -2,6 +2,16 @@
   defined('BASEPATH') OR exit('No direct script access allowed');
   
   class Datatables {
+    /**
+     * Function to generate simple search pattern 
+     * that will be use to get some data in model 
+     * using MY_Model Core
+     * 
+     * @param array $columns    Datatables columns input
+     * @param array $search     Datatables search input
+     * 
+     * @return array
+     */
     public function getSimpleSearch($columns, $search)
     {
       $keyword = trim($search['value']);
@@ -22,6 +32,15 @@
       return $param;
     }
 
+    /**
+     * Function to generate individual column search pattern 
+     * that will be use to get some data in model using MY_Model Core
+     * 
+     * @param array $columns      Datatables columns input
+     * @param array $columnsDef   ColumnsDef input
+     * 
+     * @return array
+     */
     public function getIndividualSearch($columns, $columnsDef)
     {
       $param = [];
@@ -63,6 +82,15 @@
       return $param;
     }
 
+    /**
+     * Function to generate column order pattern 
+     * that will be use to get some data in model using MY_Model Core
+     * 
+     * @param array $columns    Datatables columns input
+     * @param array $order      Datatables order input
+     * 
+     * @return array
+     */
     public function getOrder($columns, $order){
       $indexColumnOrder = $order[0]['column'];
       $columnOrderAble = $columns[$indexColumnOrder]['orderable'];
