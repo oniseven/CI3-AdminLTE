@@ -25,13 +25,16 @@ The journey began when I sought the optimal method to seamlessly integrate an Ad
 
 #### Load the template
 
-To load the template with your content you could just do
+This function has 2 parameter,
+- $view (* mandatory), its your view page files so its mandatory otherwise error will occurred
+- $data, data for your page
+To load the template with your view content you could just do
 
 ```php
 $this->template->load("welcome");
 ```
 
-if you have some data you could just simply pass on the data on the function parameter
+if you have some data you could just simply pass on the data into the function parameter
 
 ```php
 $this->template->load("welcome", $data);
@@ -45,7 +48,7 @@ $this->template->page_title("Welcome Page");
 
 #### Use Plugins
 
-Update you list of 3rd parties plugins that you use in `application/configs/plugins.php`
+Update your list of 3rd parties plugins that you use for your app in `application/configs/plugins.php`
 
 ```php
 $this->template->plugins("datatables"); 

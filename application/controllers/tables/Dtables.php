@@ -10,8 +10,7 @@ class Dtables extends CI_Controller {
 			->page_js('assets/dist/js/pages/datatables.js')
       ->load('tables/datatables');
 
-		// $this->template
-		// 	->load('tables/datatables');
+		// $this->template->load();
 	}
 
 	public function datatable()
