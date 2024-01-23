@@ -10,7 +10,7 @@ This repo also come with Datatables example usage and different concept of using
 
 ## Can I use it with other Admin Template?
 
-If what you mean by use is using the concept. Then yes, you can use the concept of templating in this repo with another Admin Template that you want. 
+If what you mean by use is using the concept? Then yes, you can use the concept of templating in this repo with another Admin Template that you want. 
 You could still use this template library by adjusting a couple things like:
 - On `application/views/template/default` folder, adjust all the file base on the Admin Template that you use. Like header, sidebar, content, and footer, you can adjust it to your need.
 - Tweaking a couple things in `application/libraries/Template.php` file specially the `load` function. Set the view to what ever file that you already set up.
