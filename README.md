@@ -12,7 +12,7 @@ The journey began when I sought the optimal method to seamlessly integrate an Ad
 
 - Clone this to your php server, you could use XAMPP or any kind of PHP server.
 - Import the demo database `demo_database_cignadlte.sql` to MySQL database server that you have.
-- Rename `.env-test` in `applications` folder to `.env`, and populate the data according to your database config.
+- Rename `.env-test` in `application` folder to `.env`, and populate the data according to your database config.
 - In cli/bash run `composer install` it will install dependency from `composer.json`.
 - That's it. You are good to go, just open your browser and go to <http://localhost/cignadlte>.
 - Have fun.
@@ -20,8 +20,8 @@ The journey began when I sought the optimal method to seamlessly integrate an Ad
 ## Usage
 
 ### Template Library
-- Location: applications/libraries
-- filename: Template.php
+- Location: `application/libraries`
+- filename: `Template.php`
 
 #### Load the template
 
@@ -33,6 +33,12 @@ $this->template->load("welcome");
 $this->template->load("welcome", $data);
 ```
 
+if you have some data you could just simply pass on the data on the function parameter
+
+```php
+$this->template->load("welcome", $data);
+```
+
 #### Set page title
 
 ```php
@@ -41,12 +47,15 @@ $this->template->page_title("Welcome Page");
 
 #### Use Plugins
 
-Update you list of 3rd parties plugins in `config/plugins.php`
+Update you list of 3rd parties plugins that you use in `application/configs/plugins.php`
 
 ```php
 $this->template->plugins("datatables"); 
-// you could also set the parameter as an array
-// exp. 
+```
+
+You could also set the parameter as an array
+
+```php
 $this->template->plugins(["datatables"]);
 ```
 
@@ -54,9 +63,11 @@ $this->template->plugins(["datatables"]);
 
 ```php
 $this->template->page_js("assets/dist/js/pages/demo.js");
-// you could also set the parameter as an array
-// if you have multiple custom js file for one page
-// exp. 
+```
+
+You could also set the parameter as an array if you have multiple custom js file for one page
+
+```php
 $this->template->page_js([
   "assets/dist/js/pages/demo1.js", 
   "assets/dist/js/pages/demo2.js"
@@ -83,7 +94,10 @@ $this->template->hide_footer(); // no parameter needed
 
 #### Hides a couple things
 
-to hides a couple things in one go, you could use this function, for now its only work to hide `content_title, breadcrums, and footer`
+to hides a couple things in one go, you could use this function, for now its only work to hide such as 
+- `content_title`
+- `breadcrums`
+- `footer`
 
 ```php
 $this->template->hides([
