@@ -16,7 +16,7 @@ You could still use this template library by adjusting a couple things like:
 - Tweaking a couple things in `application/libraries/Template.php` file specially the `load` function. Set the view to what ever file that you already set up.
 - For other functions, you can also tweak it or even delete it according to your need.
 
-But I suggest you to create your own template library file base on your Admin Template, and copy the concept of this repo template library. Because every admin template have their own unique points, fitures, and structures that might not fit with the template library that I create in here which is sorely base on AdminLTE.
+But I suggest you to create your own template library file base on your Admin Template, and copy the concept of this repo template library. Because every admin template have their own unique points, fitures, and structures that might not fit with the template library that I create in here which is solely based on AdminLTE.
 
 ## Server Requirements
 
