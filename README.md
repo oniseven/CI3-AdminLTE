@@ -2,6 +2,8 @@
 
 The journey began when I sought the optimal method to seamlessly integrate an Admin Template with CodeIgniter 3. Exploring various approaches, including Core, Helper, and Library implementations, I experimented with each method. Ultimately, I discovered that the choice between these approaches is subjective, dependent on personal preference. Any method can be employed, as long as it aligns with your ease of understanding and accomplishes your objectives. In this repository, I adopted the Library approach, finding it notably more convenient for maintenance compared to alternative methods. In this repo I use CodeIgniter 3 and AdminLTE 3.2.0 for the admin template.
 
+So if you are looking for a ready to use CodeIgniter 3 with AdminLTE Template, feel free to clone this repo and tweak it according to your needs.
+
 ## Can I use it with other Admin Template?
 
 If what you mean by use is using the concept. Then yes, you can use the concept of templating in this repo with another Admin Template that you want. 
