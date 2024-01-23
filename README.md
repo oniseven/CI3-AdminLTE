@@ -1,6 +1,6 @@
 ## What is Cignadlte (Codeigiter 3 + AdminLTE 3.2.0)
 
-The journey began when I sought the optimal method to seamlessly integrate an Admin Template with CodeIgniter 3. Exploring various approaches, including Core, Helper, and Library implementations, I experimented with each method. Ultimately, I discovered that the choice between these approaches is subjective, dependent on personal preference. Any method can be employed, as long as it aligns with your ease of understanding and accomplishes your objectives. In this repository, I adopted the Library approach, finding it notably more convenient for maintenance compared to alternative methods.
+The journey began when I sought the optimal method to seamlessly integrate an Admin Template with CodeIgniter 3. Exploring various approaches, including Core, Helper, and Library implementations, I experimented with each method. Ultimately, I discovered that the choice between these approaches is subjective, dependent on personal preference. Any method can be employed, as long as it aligns with your ease of understanding and accomplishes your objectives. In this repository, I adopted the Library approach, finding it notably more convenient for maintenance compared to alternative methods. In this repo I use CodeIgniter 3 and AdminLTE 3.2.0 for the admin template.
 
 ## Server Requirements
 
@@ -122,6 +122,15 @@ $this->template
   ->page_js("assets/dist/js/pages/demo.js")
   ->load("welcome", $data);
 ```
+
+## Can I use it with other Admin Template?
+
+If what you mean is the concept. Then yes, you can use the concept of templating in this repo to use it with another Admin Template that you desire. By adjusting a couple thins like:
+- On `application/views/template/default` folder, adjust all the file base on the Admin Template that you use. Like header, sidebar, content, and footer, you can adjust it to your need. and then
+- Tweaking a couple things in `application/libraries/Template.php` file specially the `load` function. Set the view to what ever file that you already set up.
+- For other functions, you can also tweak it or even delete it according to your need.
+
+But I suggest you to create your own template library file base on your Admin Template, and copy the concept of this repo template library. Because every admin template have their own unique points/fiturs that might not fit with the template library that I create in here.
 
 ## Resources
 
