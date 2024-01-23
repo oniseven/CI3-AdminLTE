@@ -120,7 +120,7 @@ or
 $data = []; // set your data here
 $this->template
   ->page_title("Welcome Page")
-  ->plugins("datatables");
+  ->plugins("datatables")
   ->page_js("assets/dist/js/pages/demo.js")
   ->load("welcome", $data);
 ```
