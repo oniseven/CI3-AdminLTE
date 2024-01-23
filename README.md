@@ -1,8 +1,12 @@
-## What is CI3-AdminLTE (Codeigiter 3 + AdminLTE 3.2.0)
+## What is CI3-AdminLTE (Codeigiter 3.1.11 + AdminLTE 3.2.0)
 
-The journey began when I sought the optimal method to seamlessly integrate an Admin Template with CodeIgniter 3. Exploring various approaches, including Core, Helper, and Library implementations, I experimented with each method. Ultimately, I discovered that the choice between these approaches is subjective, dependent on personal preference. Any method can be employed, as long as it aligns with your ease of understanding and accomplishes your objectives. In this repository, I adopted the Library approach, finding it notably more convenient for maintenance compared to alternative methods. In this repo I use CodeIgniter 3 and AdminLTE 3.2.0 for the admin template.
+The journey began when I sought the optimal method to seamlessly integrate an Admin Template with CodeIgniter 3. Exploring various approaches, including Core, Helper, and Library implementations, I experimented with each method. Ultimately, I discovered that the choice between these approaches is subjective, dependent on personal preference. Any method can be employed, as long as it aligns with your ease of understanding and accomplishes your objectives. In this repository, I adopted the Library approach, finding it notably more convenient for maintenance compared to alternative methods. 
 
-So if you are looking for a ready to use CodeIgniter 3 with AdminLTE Template, feel free to clone this repo and tweak it according to your needs.
+In this repo I use `CodeIgniter 3.1.11` and `AdminLTE 3.2.0` for the admin template.
+
+So if you are looking for a ready to use CodeIgniter 3 with AdminLTE Template, feel free to clone this repo and tweak it according to your needs. 
+
+This repo also come with Datatables example usage and different concept of using `Model` and `Core Model`. That might gonna need a tweak here and there depend on your personal preference.
 
 ## Can I use it with other Admin Template?
 
