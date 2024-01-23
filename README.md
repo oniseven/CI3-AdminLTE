@@ -29,8 +29,6 @@ To load the template with your content you could just do
 
 ```php
 $this->template->load("welcome");
-// if you have some data you could just simply add $data on the function parameter
-$this->template->load("welcome", $data);
 ```
 
 if you have some data you could just simply pass on the data on the function parameter
