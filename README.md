@@ -6,7 +6,7 @@ In this repo I use `CodeIgniter 3.1.13` and `AdminLTE 3.2.0` for the admin templ
 
 So if you are looking for a ready to use CodeIgniter 3 with AdminLTE Template, feel free to clone this repo and tweak it according to your needs. 
 
-This repo also come with Datatables example usage and different concept of using `Model` and `Core Model`. That might gonna need a tweak here and there depend on your personal preference.
+This repo also come with Datatables example usage and different concept of using `Model` and `Core Model` and also `Dynamic Menus`. That might gonna need a tweak here and there depend on your personal preference.
 
 ## Can I use it with other Admin Template?
 
