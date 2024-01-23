@@ -42,8 +42,8 @@ But I suggest you to create your own template library file base on your Admin Te
 #### Load the template
 
 This function has 2 parameter,
-- $view (* mandatory), its your view page files so its mandatory otherwise error will occurred
-- $data, data for your page
+- `$view` (* mandatory): Its your view page files so its mandatory otherwise error will occurred
+- `$data`: Data for your page
 To load the template with your view content you could just do
 
 ```php
