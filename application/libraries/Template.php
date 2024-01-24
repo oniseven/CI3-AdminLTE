@@ -208,7 +208,8 @@ class Template
 
     // generate sidebar / left menu
     $data['left_menus'] = $this->generate_html_menu(); 
-      
+    
+    // load the page base on the page_type, default will be loading all the header, menus, sidebar, and footer.
     if($this->page_type === "blank"){
       $this->CI->load->view("{$this->template_view_folder}/blank/header", $data);
       $this->CI->load->view($view);
