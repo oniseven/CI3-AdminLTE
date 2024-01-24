@@ -165,13 +165,13 @@ class Template
   }
 
   /**
-   * Function to set class of some tag that exist in allowed_tags_class variable
+   * Function to set tag class of some tag that exist in allowed_tags_class variable
    * 
    * @param string $classes
    * 
    * @return object
    */
-  public function set_class($tag, $classes) {
+  public function set_tag_class($tag, $classes) {
     if(!in_array($tag, $this->allowed_tags_class))
       show_error("Tag <b>\"{$tag}\"</b> its not on the allowed list tags for adding class.");
 
