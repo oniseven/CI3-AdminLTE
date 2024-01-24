@@ -7,7 +7,7 @@ class Login extends CI_Controller {
 		$this->template
       ->page_type('blank')
       ->page_title('Login page')
-      ->set_class('body', 'hold-transition login-page')
+      ->set_tag_class('body', 'hold-transition login-page')
       ->load('login');
 	}
 }
