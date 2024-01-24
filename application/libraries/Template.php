@@ -9,6 +9,9 @@ class Template
    * @var boolean       $content_toolbar          On/Off to show content_toolbar of the default template, default: true
    * @var boolean       $breadcrums               On/Off to show breadcrums of the default template, default: true
    * @var boolean       $footer                   On/Off to show footer of the default template, default: true
+   * @var string        $page_type                Page type to load, 
+   *                                              default: Load the template with header and sidebar menu
+   *                                              blank: Load the template with no header, sidebar, and footer, just complete blank page
    * @var string        $page_title               Page title
    * @var array|string  $page_js                  Custom page javascript
    * @var integer       $privilege_id             User privilege id
@@ -17,25 +20,43 @@ class Template
    * @var object        $sessions                 Contain user login sessions
    * @var array         $css                      Plugin css
    * @var array         $js                       Plugin js
+   * @var array         $classes                  Additional/Custom class for specific tag that exist in $allowed_tags_class variable
+   * @var array         $allowed_tags_class       List of allowed tag that able to set custom class
    */
+
   var $CI;
   private $template_view_folder = 'template';
   public $content_toolbar = true;
   public $breadcrums = true;
   public $footer = true;
+  public $page_type = 'default';
   public $page_title = 'Default Title';
   public $page_js = [];
   public $sessions, $privilege_id;
   public $setting, $profile;
   public $css = [];
   public $js = [];
-
+  public $classes = ["body" => ""];
+  private $allowed_tags_class = ["body"];
+  
   public function __construct() {
     $this->CI =& get_instance();
     // $this->privilege_id = $this->CI->auth->get_user_data("privilege_id");
     // $this->sessions = $this->CI->auth->get_user_data();
     // $this->setting = $this->CI->app_setting->get();
     // $this->profile = $this->setting->profile;
+  }
+
+  /**
+   * Function to set what page view that gonna be reaload
+   * 
+   * @param string $type
+   * 
+   * @return object
+   */
+  public function page_type($type) {
+    $this->page_type = $type;
+    return $this;
   }
 
   /**
@@ -144,10 +165,25 @@ class Template
   }
 
   /**
+   * Function to set class of some tag that exist in allowed_tags_class variable
+   * 
+   * @param string $classes
+   * 
+   * @return object
+   */
+  public function set_class($tag, $classes) {
+    if(!in_array($tag, $this->allowed_tags_class))
+      show_error("Tag <b>\"{$tag}\"</b> its not on the allowed list tags for adding class.");
+
+    $this->classes[$tag] = $classes;
+    return $this;
+  }
+
+  /**
    * Load default template
    * 
-   * @param string $view  page view file
-   * @param array $data   template data and settings
+   * @param string  $view         page view file
+   * @param array   $data         template data and settings
    * 
    * @return html
    */
@@ -165,38 +201,27 @@ class Template
     $data['plugin_js'] = array_unique(array_merge($this->js, ($data["plugin_js"] ?? [])));
     $data['page_css'] = array_unique($data['page_css'] ?? []);
     $data['page_js'] = array_unique($this->page_js);
+    $data['classes'] = $this->classes;
 
     // generate top menu
     $data['top_menus'] = $this->generate_html_menu("top"); 
 
     // generate sidebar / left menu
     $data['left_menus'] = $this->generate_html_menu(); 
-    
-    $this->CI->load->view("{$this->template_view_folder}/default/header", $data);
-    $this->CI->load->view("{$this->template_view_folder}/default/sidebar");
-    $this->CI->load->view("{$this->template_view_folder}/default/start_content");
-    $this->CI->load->view($view);
-    $this->CI->load->view("{$this->template_view_folder}/default/end_content");
-    $this->CI->load->view("{$this->template_view_folder}/default/control_sidebar");
-    $this->CI->load->view("{$this->template_view_folder}/default/footer");
-  }
-
-  /**
-   * Load template for printing
-   * 
-   * @param string $view  page view file
-   * @param array $data   template data and settings
-   * 
-   * @return html
-   */
-  public function print($view, $data = []) {
-    // $data['session'] = $this->sessions;
-    // $data['setting'] = $this->setting;
-    // $data['profile'] = $this->profile;
-    
-    $this->CI->load->view("{$this->template_view_folder}/print/header", $data);
-    $this->CI->load->view($view);
-    $this->CI->load->view("{$this->template_view_folder}/print/footer");
+      
+    if($this->page_type === "blank"){
+      $this->CI->load->view("{$this->template_view_folder}/blank/header", $data);
+      $this->CI->load->view($view);
+      $this->CI->load->view("{$this->template_view_folder}/blank/footer");
+    } else {
+      $this->CI->load->view("{$this->template_view_folder}/default/header", $data);
+      $this->CI->load->view("{$this->template_view_folder}/default/sidebar");
+      $this->CI->load->view("{$this->template_view_folder}/default/start_content");
+      $this->CI->load->view($view);
+      $this->CI->load->view("{$this->template_view_folder}/default/end_content");
+      $this->CI->load->view("{$this->template_view_folder}/default/control_sidebar");
+      $this->CI->load->view("{$this->template_view_folder}/default/footer");
+    }
   }
 
   /**
