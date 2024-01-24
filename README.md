@@ -57,7 +57,19 @@ if you have some data you could just simply pass on the data into the function p
 $this->template->load("welcome", $data);
 ```
 
-#### Set page title
+#### Set Page Type
+
+There are 2 page type that currently exist in this application.
+1. `default` page, which is gonna include all default AdminLTE like header, menus, sidebar, and footer.
+2. `blank` page, which is a literally blank page with no header, menus, sidebar, and footer. for example, login page will use this type of page because  it contains no header, menus, and else.
+
+By default, the page type value is `default`. so you dont have to call this methode if you are using the default page.
+
+```php
+$this->template->page_type("blank");
+```
+
+#### Set Page Title
 
 ```php
 $this->template->page_title("Welcome Page");
@@ -75,6 +87,17 @@ You could also set the parameter as an array
 
 ```php
 $this->template->plugins(["datatables"]);
+```
+
+#### Set Class
+
+This methode is use if you want to add a custom or additional class to some specific tags. For now it just able to add class to
+- `body`
+
+You can add more by editing the template library file.
+
+```php
+$this->template->set_tag_class("body", "hold-transition login-page");
 ```
 
 #### Set Page JS
