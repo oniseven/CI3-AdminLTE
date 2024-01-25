@@ -172,10 +172,10 @@ Other example
 
 ```php
 $this->template
-      ->page_type('blank')
-      ->page_title('Login page')
-      ->tag_class('body', 'hold-transition login-page')
-      ->load('login');
+  ->page_type('blank')
+  ->page_title('Login page')
+  ->tag_class('body', 'hold-transition login-page')
+  ->load('login');
 ```
 
 ## Resources
