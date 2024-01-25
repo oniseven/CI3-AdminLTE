@@ -89,7 +89,7 @@ You could also set the parameter as an array
 $this->template->plugins(["datatables"]);
 ```
 
-#### Set Class
+#### Set Custom Class
 
 This methode is use if you want to add a custom or additional class to some specific tags. For now it just able to add class to
 - `body`
@@ -97,7 +97,7 @@ This methode is use if you want to add a custom or additional class to some spec
 You can add more by editing the template library file.
 
 ```php
-$this->template->set_tag_class("body", "hold-transition login-page");
+$this->template->tag_class("body", "hold-transition login-page");
 ```
 
 #### Set Page JS
