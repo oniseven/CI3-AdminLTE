@@ -156,7 +156,9 @@ $this->template->plugins("datatables");
 $this->template->page_js("assets/dist/js/pages/demo.js");
 $this->template->load("welcome");
 ```
+
 or
+
 ```php
 $data = []; // set your data here
 $this->template
@@ -164,6 +166,16 @@ $this->template
   ->plugins("datatables")
   ->page_js("assets/dist/js/pages/demo.js")
   ->load("welcome", $data);
+```
+
+Other example
+
+```php
+$this->template
+      ->page_type('blank')
+      ->page_title('Login page')
+      ->tag_class('body', 'hold-transition login-page')
+      ->load('login');
 ```
 
 ## Resources
