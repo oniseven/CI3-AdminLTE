@@ -26,6 +26,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
   <!-- Custom style -->
   <link rel="stylesheet" href="assets/dist/css/custom.css">
+  <!-- Current Custom Page CSS -->
+  <?php
+    foreach ($page_css as $key => $value) {
+      echo sprintf('<link rel="stylesheet" href="%s">', $value);
+    }
+  ?>
 </head>
 <body class="hold-transition sidebar-mini <?php echo $classes['body']; ?>">
 <div class="wrapper">

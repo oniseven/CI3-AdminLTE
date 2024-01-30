@@ -13,6 +13,7 @@ class Template
    *                                              default: Load the template with header and sidebar menu
    *                                              blank: Load the template with no header, sidebar, and footer, just complete blank page
    * @var string        $page_title               Page title
+   * @var array|string  $page_css                 Custom page CSS Style
    * @var array|string  $page_js                  Custom page javascript
    * @var integer       $privilege_id             User privilege id
    * @var object        $setting                  App setting variable from App_setting library
@@ -31,6 +32,7 @@ class Template
   public $footer = true;
   public $page_type = 'default';
   public $page_title = 'Default Title';
+  public $page_css = [];
   public $page_js = [];
   public $sessions, $privilege_id;
   public $setting, $profile;
@@ -68,6 +70,20 @@ class Template
    */
   public function page_title($title) {
     $this->page_title = $title;
+    return $this;
+  }
+
+  /**
+   * Function to add page title, default: Default Title
+   * 
+   * @param string|array $paths
+   * 
+   * @return object
+   */
+  public function page_css($paths) {
+    if(!empty($paths)) 
+      $this->page_css = !is_array($paths) ? [$paths] : $paths;
+
     return $this;
   }
 

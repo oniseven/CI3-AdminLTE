@@ -14,5 +14,11 @@
   <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
   <!-- Custom style -->
   <link rel="stylesheet" href="assets/dist/css/custom.css">
+  <!-- Current Custom Page CSS -->
+  <?php
+    foreach ($page_css as $key => $value) {
+      echo sprintf('<link rel="stylesheet" href="%s">', $value);
+    }
+  ?>
 </head>
 <body class="<?php echo $classes['body']; ?>">
