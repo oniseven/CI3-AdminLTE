@@ -100,7 +100,22 @@ You can add more by editing the template library file.
 $this->template->tag_class("body", "hold-transition login-page");
 ```
 
-#### Set Page JS
+#### Add Custom Page CSS
+
+```php
+$this->template->page_css("assets/dist/css/pages/demo.css");
+```
+
+You could also set the parameter as an array if you have multiple custom js file for one page
+
+```php
+$this->template->page_css([
+  "assets/dist/css/pages/demo1.css", 
+  "assets/dist/css/pages/demo2.css"
+]);
+```
+
+#### Add Custom Page JS
 
 ```php
 $this->template->page_js("assets/dist/js/pages/demo.js");
