@@ -12,5 +12,7 @@
   <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
+  <!-- Custom style -->
+  <link rel="stylesheet" href="assets/dist/css/custom.css">
 </head>
 <body class="<?php echo $classes['body']; ?>">

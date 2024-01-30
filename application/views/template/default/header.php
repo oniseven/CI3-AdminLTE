@@ -24,6 +24,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   ?>
   <!-- Theme style -->
   <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
+  <!-- Custom style -->
+  <link rel="stylesheet" href="assets/dist/css/custom.css">
 </head>
 <body class="hold-transition sidebar-mini <?php echo $classes['body']; ?>">
 <div class="wrapper">
