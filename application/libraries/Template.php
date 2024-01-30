@@ -215,7 +215,7 @@ class Template
     $data['page_title'] = $this->page_title;
     $data['plugin_css'] = array_unique(array_merge($this->css, ($data["plugin_css"] ?? [])));
     $data['plugin_js'] = array_unique(array_merge($this->js, ($data["plugin_js"] ?? [])));
-    $data['page_css'] = array_unique($data['page_css'] ?? []);
+    $data['page_css'] = array_unique($this->page_css);
     $data['page_js'] = array_unique($this->page_js);
     $data['classes'] = $this->classes;
 
