@@ -20,7 +20,7 @@ But I suggest you to create your own template library file base on your Admin Te
 
 ## Server Requirements
 
-- PHP version 7 (It has to be 7+ because I use ?? in some of the code)
+- PHP version 7 or newer (It has to be 7+ because I use ?? in some of the code)
 - MySQL Server (Testing in MariaDB 10.5.4)
 - Composer
 
