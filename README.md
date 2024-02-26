@@ -20,9 +20,9 @@ But I suggest you to create your own template library file base on your Admin Te
 
 ## Server Requirements
 
-- PHP version 5.6 or newer is recommended. (Testing in PHP 7)
-- MySQL Server. (Testing in MariaDB 10.5.4)
-- Composer.
+- PHP version 7 (It has to be 7+ because I use ?? in some of the code)
+- MySQL Server (Testing in MariaDB 10.5.4)
+- Composer
 
 ## Installations
 
@@ -30,7 +30,7 @@ But I suggest you to create your own template library file base on your Admin Te
 - Import the demo database `demo_database_cignadlte.sql` to MySQL database server that you have.
 - Rename `.env-test` in `application` folder to `.env`, and populate the data according to your database config.
 - In cli/bash run `composer install` it will install dependency from `composer.json`.
-- That's it. You are good to go, just open your browser and go to <http://localhost/cignadlte>.
+- That's it. You are good to go, just open your browser and go to <http://localhost/yourappname>.
 - Have fun.
 
 ## Usage
