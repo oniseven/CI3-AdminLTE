@@ -1,5 +1,3 @@
-----
-
 # Index
 
 * [What is CI3-AdminLTE](#what-is-ci3-adminlte-codeigiter-3113--adminlte-320)
@@ -23,7 +21,7 @@
 * [Model Usage](#model-usage)
   * [Details](#details-1)
   * [Public Variables](#public-variables)
-  * [Creating Model extends MY_Model](#examples-creating-model-extends-my_model)
+  * [Examples Creating Model extends MY_Model](#examples-creating-model-extends-my_model)
 * [Resources](#resources)
 
 ----
