@@ -21,8 +21,7 @@ class Template
    * @var object        $sessions                 Contain user login sessions
    * @var array         $css                      Plugin css
    * @var array         $js                       Plugin js
-   * @var array         $classes                  Additional/Custom class for specific tag that exist in $allowed_tags_class variable
-   * @var array         $allowed_tags_class       List of allowed tag that able to set custom class
+   * @var array         $classes                  Additional/Custom class for specific tag
    */
 
   var $CI;
@@ -38,15 +37,11 @@ class Template
   public $setting, $profile;
   public $css = [];
   public $js = [];
-  public $classes = ["body" => ""];
-  private $allowed_tags_class = ["body"];
+  public $classes = [];
+  // private $allowed_tags_class = ["body"];
   
   public function __construct() {
     $this->CI =& get_instance();
-    // $this->privilege_id = $this->CI->auth->get_user_data("privilege_id");
-    // $this->sessions = $this->CI->auth->get_user_data();
-    // $this->setting = $this->CI->app_setting->get();
-    // $this->profile = $this->setting->profile;
   }
 
   /**
@@ -188,9 +183,6 @@ class Template
    * @return object
    */
   public function tag_class($tag, $classes) {
-    if(!in_array($tag, $this->allowed_tags_class))
-      show_error("Tag <b>\"{$tag}\"</b> its not on the allowed list tags for adding class.");
-
     $this->classes[$tag] = $classes;
     return $this;
   }
@@ -218,12 +210,6 @@ class Template
     $data['page_css'] = array_unique($this->page_css);
     $data['page_js'] = array_unique($this->page_js);
     $data['classes'] = $this->classes;
-
-    // generate top menu
-    $data['top_menus'] = $this->generate_html_menu("top"); 
-
-    // generate sidebar / left menu
-    $data['left_menus'] = $this->generate_html_menu(); 
     
     // load the page base on the page_type, default will be loading all the header, menus, sidebar, and footer.
     if($this->page_type === "blank"){
@@ -231,6 +217,12 @@ class Template
       $this->CI->load->view($view);
       $this->CI->load->view("{$this->template_view_folder}/blank/footer");
     } else {
+      // generate top menu
+      $data['top_menus'] = $this->generate_html_menu("top"); 
+
+      // generate sidebar / left menu
+      $data['left_menus'] = $this->generate_html_menu(); 
+
       $this->CI->load->view("{$this->template_view_folder}/default/header", $data);
       $this->CI->load->view("{$this->template_view_folder}/default/sidebar");
       $this->CI->load->view("{$this->template_view_folder}/default/start_content");
