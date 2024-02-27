@@ -38,7 +38,6 @@ class Template
   public $css = [];
   public $js = [];
   public $classes = [];
-  // private $allowed_tags_class = ["body"];
   
   public function __construct() {
     $this->CI =& get_instance();
