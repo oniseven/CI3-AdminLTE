@@ -127,10 +127,7 @@ $this->template->plugins(["datatables"]);
 
 ### Set Custom Class
 
-This methode is use if you want to add a custom or additional class to some specific tags. For now it just able to add class to
-- `body`
-
-You can add more by editing the template library file.
+This methode is use if you want to add a custom or additional class to some specific tags. Access the tag classes data in view by calling `$classes` variable.
 
 ```php
 $this->template->tag_class("body", "hold-transition login-page");
@@ -247,7 +244,7 @@ $this->template
 
 # Model Usage
 
-Honestly I hate to repeat my self to type the same function again and again a cross all model file. Thats why I made this custom core model called `MY_Model`. All the function in this core model, I made it base on what I need in most of my App, which could be not fit with you. Feel free to not use it if you dont want it. If you dont use it, you definitely gonna need to tweak the `Template Library` for the menu part and also the `datatables`.
+Honestly I hate to repeat my self to type the same function again and again across all model file, like insert update delete. Thats why I made this custom core model called `MY_Model`. All the function in this core model, I made it base on what I need in most of my App, like insert, update, delete, and a couple other functions so I don't have to copy and paste it across all Model, which could be not fit with you. So, feel free to not use it if you don't want it and if you don't use it, don't forget to tweak the `Template Library` for the menu part and also the `datatables` example controller.
 
 ## Details
 - Location: `application/core`
