@@ -212,33 +212,33 @@ Honestly I hate to repeat my self to type the same function again and again a cr
 		<td>Description</td>
 	</tr>
 	<tr>
-		<td>$db_group</td>
+		<td><code>$db_group</code></td>
 		<td>default</td>
-		<td>This a database group that had been you set on the config database file, by default the group name is **'default'**, but if you have multiple database connection with different group name you can set the group name in here</td>
+		<td>This a database group that had been you set on the config database file, by default the group name is <b>default</b>, but if you have multiple database connection with different group name you can set the group name in here</td>
 	</tr>
   <tr>
-    <td>$db_name</td>
-    <td>NULL</td>
+    <td><code>$db_name</code></td>
+    <td><i>NULL</i></td>
     <td>This database name is used only if you want to access different database within the same database group</td>
   </tr>
   <tr>
-    <td>$table *</td>
+    <td><code>$table</code> *</td>
     <td></td>
     <td>Current table name that used by the model, this is mandatory</td>
   </tr>
   <tr>
-    <td>$alias</td>
-    <td>NULL</td>
+    <td><code>$alias</code></td>
+    <td><i>NULL</i></td>
     <td>If you want to set an alias for your table, you can set it here</td>
   </tr>
   <tr>
-    <td>$id_column_name</td>
+    <td><code>$id_column_name</code></td>
     <td>id</td>
-    <td>We do know that most of table has their own primary id, and usually the column name is `id`, but if somehow you decided to name the column differently like `not_id` maybe, then you better set this to that name</td>
+    <td>We do know that most of table has their own primary id, and usually the column name is <code>id</code>, but if somehow you decided to name the column differently like <code>not_id</code> maybe, then you better set this to that name</td>
   </tr>
   <tr>
-    <td>$allow_columns</td>
-    <td>NULL</td>
+    <td><code>$allow_columns</code></td>
+    <td><i>NULL</i></td>
     <td>List of allowed column for the table, make sure its in array, once again it must be an array</td>
   </tr>
 </table>
