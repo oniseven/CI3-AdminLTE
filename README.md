@@ -18,10 +18,11 @@
   * [Hide Footer](#hide-footer)
   * [Hides a couple things](#hides-a-couple-things)
   * [Examples](#examples)
-* [Model Usage](#model-usage)
+* [Model Usage](#core-my_model-usage)
   * [Details](#details-1)
   * [Public Variables](#public-variables)
   * [Examples Creating Model extends MY_Model](#examples-creating-model-extends-my_model)
+  * [Examples Model Usage](#examples-model-usage)
 * [Resources](#resources)
 
 ----
@@ -333,7 +334,42 @@ of if you want to declare a model with different group connection
   }
 ```
 
-## Resources
+----
+
+## Examples Modal Usage
+
+### Insert Data
+
+```php
+// load model
+$this->load->model('users');
+
+// set all the data
+$params = [
+  'data' => [
+    'fullname' => 'John Doe',
+    'email' => 'john_doe@mail.com'
+  ],
+  'data_false' => [
+    'invoice_date' => 'CURDATE()'
+  ]
+];
+
+// insert the data
+$query = $this->users->insert($params);
+
+// check the query status
+if(!$query->status) return false;
+
+return true;
+```
+
+### Update Data
+
+### Delete Data
+
+
+# Resources
 
 -  Codeigniter <https://codeigniter.com/docs>
 -  AdminLTE <https://github.com/ColorlibHQ/AdminLTE>
