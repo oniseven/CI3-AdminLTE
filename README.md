@@ -300,7 +300,8 @@ Honestly I hate to repeat my self to type the same function again and again acro
     public $table = "users";
     public $alias = "u";
 
-    // this is not mandatory, this allowed columns checker will only be running when its not empty and only when you are calling insert and update function
+    // this is not mandatory, this allowed columns checker will only be running 
+    // when its not empty and only when you are calling insert and update function
     public $allowed_columns = [
       'id', 
       'fullname', 
