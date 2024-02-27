@@ -10,16 +10,21 @@
   * [Details](#details)
   * [Load The Template](#details)
   * [Set Page Type](#set-page-type)
-  * [Set Page Title]()
-  * [Use Plugins]()
-  * [Set Custom Class]()
-  * [Add Custom Page CSS]()
-  * [Add Custom Page JS]()
-  * [Hide Toolbar Content]()
-  * [Hide Breadcrums]()
-  * [Hide Footer]()
-  * [Hides a couble things]()
-  * [Examples]()
+  * [Set Page Title](#set-page-title)
+  * [Use Plugins](#use-plugins)
+  * [Set Custom Class](#set-custom-class)
+  * [Add Custom Page CSS](#add-custom-page-css)
+  * [Add Custom Page JS](#add-custom-page-js)
+  * [Hide Toolbar Content](#hide-toolbar-content)
+  * [Hide Breadcrums](#hide-breadcrums)
+  * [Hide Footer](#hide-footer)
+  * [Hides a couple things](#hides-a-couple-things)
+  * [Examples](#examples)
+* [Model Usage](#model-usage)
+  * [Details](#details-1)
+  * [Public Variables](#public-variables)
+  * [Creating Model extends MY_Model](#examples-creating-model-extends-my_model)
+* [Resources](#resources)
 
 ----
 
@@ -64,7 +69,7 @@ But I suggest you to create your own template library file base on your Admin Te
 - Location: `application/libraries`
 - filename: `Template.php`
 
-#### Load the template
+### Load the template
 
 This function has 2 parameter,
 - `$view` (* mandatory): Its your view page files so its mandatory otherwise error will occurred
@@ -82,7 +87,9 @@ if you have some data you could just simply pass on the data into the function p
 $this->template->load("welcome", $data);
 ```
 
-#### Set Page Type
+----
+
+### Set Page Type
 
 There are 2 page type that currently exist in this application.
 1. `default` page, which is gonna include all default AdminLTE like header, menus, sidebar, and footer.
@@ -94,13 +101,17 @@ By default, the page type value is `default`. so you dont have to call this meth
 $this->template->page_type("blank");
 ```
 
-#### Set Page Title
+----
+
+### Set Page Title
 
 ```php
 $this->template->page_title("Welcome Page");
 ```
 
-#### Use Plugins
+----
+
+### Use Plugins
 
 Update your list of 3rd parties plugins that you use for your app in `application/configs/plugins.php`
 
@@ -114,7 +125,9 @@ You could also set the parameter as an array
 $this->template->plugins(["datatables"]);
 ```
 
-#### Set Custom Class
+----
+
+### Set Custom Class
 
 This methode is use if you want to add a custom or additional class to some specific tags. For now it just able to add class to
 - `body`
@@ -125,7 +138,9 @@ You can add more by editing the template library file.
 $this->template->tag_class("body", "hold-transition login-page");
 ```
 
-#### Add Custom Page CSS
+----
+
+### Add Custom Page CSS
 
 ```php
 $this->template->page_css("assets/dist/css/pages/demo.css");
@@ -140,7 +155,9 @@ $this->template->page_css([
 ]);
 ```
 
-#### Add Custom Page JS
+----
+
+### Add Custom Page JS
 
 ```php
 $this->template->page_js("assets/dist/js/pages/demo.js");
@@ -155,25 +172,33 @@ $this->template->page_js([
 ]);
 ```
 
-#### Hide Toolbar Content
+----
+
+### Hide Toolbar Content
 
 ```php
 $this->template->hide_content_toolbar(); // no parameter needed
 ```
 
-#### Hide Breadcrums
+----
+
+### Hide Breadcrums
 
 ```php
 $this->template->hide_breadcrums(); // no parameter needed
 ```
 
-#### Hide Footer
+----
+
+### Hide Footer
 
 ```php
 $this->template->hide_footer(); // no parameter needed
 ```
 
-#### Hides a couple things
+----
+
+### Hides a couple things
 
 to hides a couple things in one go, you could use this function, for now its only work to hide such as 
 - `content_title`
@@ -188,7 +213,9 @@ $this->template->hides([
 ]);
 ```
 
-#### Full Example
+----
+
+### Examples
 
 ```php
 $this->template->page_title("Welcome Page");
@@ -220,15 +247,15 @@ $this->template
 
 ---
 
-## Model Usage
+# Model Usage
 
 Honestly I hate to repeat my self to type the same function again and again a cross all model file. Thats why I made this custom core model called `MY_Model`. All the function in this core model, I made it base on what I need in most of my App, which could be not fit with you. Feel free to not use it if you dont want it. If you dont use it, you definitely gonna need to tweak the `Template Library` for the menu part and also the `datatables`.
 
-### Details
+## Details
 - Location: `application/core`
 - filename: `MY_Model.php`
 
-### Public Variables
+## Public Variables
 
 <table>
 	<tr>
@@ -268,7 +295,7 @@ Honestly I hate to repeat my self to type the same function again and again a cr
   </tr>
 </table>
 
-### Creating Model extends MY_Model
+## Examples Creating Model extends MY_Model
 
 ```php
   // Location: application/models
