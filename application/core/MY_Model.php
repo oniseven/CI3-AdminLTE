@@ -3,8 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MY_Model extends CI_Model {
   /**
-   * @var string $db_group     Contain group database that been use in config/database.php, default "default"
-   * @var string $db_name      Database name, use when the table has different database name but still 
+   * @var string      $db_group     Contain group database that been use in config/database.php, default "default"
+   * @var string|NULL $db_name      Database name, use when the table has different database name but still 
    *                           on the same group of database, default "NULL"
    * @var string      $table                          Table name
    * @var string      $alias                          Table alias name
@@ -16,12 +16,12 @@ class MY_Model extends CI_Model {
    */
   public $db_group = 'default';
   public $db_name = NULL;
-  public $table = NULL;
+  public $table;
   public $alias = NULL;
   public $id_column_name = 'id';
   public $allowed_columns = NULL;
-  public $table_name;
-  public $id_column_name_with_alias;
+  private $table_name;
+  private $id_column_name_with_alias;
 
   public function __construct(){
     parent::__construct();
