@@ -60,7 +60,7 @@ class MY_Model extends CI_Model {
    * 
    * @return boolean
    */
-  public function is_allowed_column($params){
+  public function is_column_allowed($params){
     $dataKeys = array_key_exists('data', $params) ? array_keys($params['data']) : [];
     $dataFalseKeys = array_key_exists('data_false', $params) ? array_keys($params['data_false']) : [];
     $columns = array_unique(array_merge($dataKeys, $dataFalseKeys));
@@ -92,7 +92,7 @@ class MY_Model extends CI_Model {
    * @return object
    */
   public function insert($params){
-    if(!empty($this->allowed_columns) && !$this->is_allowed_column($params))
+    if(!empty($this->allowed_columns) && !$this->is_column_allowed($params))
       throw new Exception("Data contain not allowed columns", 1);
 
     $db = $this->db_init();
@@ -117,7 +117,7 @@ class MY_Model extends CI_Model {
    * @return object
    */
   public function update($params){
-    if(!empty($this->allowed_columns) && !$this->is_allowed_column($params))
+    if(!empty($this->allowed_columns) && !$this->is_column_allowed($params))
       throw new Exception("Data contain not allowed coolumns", 1);
 
     $db = $this->db_init();
