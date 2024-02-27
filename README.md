@@ -212,7 +212,7 @@ Honestly I hate to repeat my self to type the same function again and again a cr
 		<td>Description</td>
 	</tr>
 	<tr>
-		<td>$db_group</td>
+		<td>....$db_group</td>
 		<td>default</td>
 		<td>This a database group that had been you set on the config database file, by default the group name is 'default', but if you have multiple database connection with different group name you can set the group name in here</td>
 	</tr>
