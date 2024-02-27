@@ -242,7 +242,7 @@ $this->template
 
 ---
 
-# Model Usage
+# Core MY_Model Usage
 
 Honestly I hate to repeat my self to type the same function again and again across all model file, like insert update delete. Thats why I made this custom core model called `MY_Model`. All the function in this core model, I made it base on what I need in most of my App, like insert, update, delete, and a couple other functions so I don't have to copy and paste it across all Model, which could be not fit with you. So, feel free to not use it if you don't want it and if you don't use it, don't forget to tweak the `Template Library` for the menu part and also the `datatables` example controller.
 
