@@ -193,6 +193,8 @@ $this->template
   ->load('login');
 ```
 
+---
+
 ## Model Usage
 
 Honestly I hate to repeat my self to type the same function again and again a cross all model file. Thats why I made this custom core model called `MY_Model`. All the function in this core model, I made it base on what I need in most of my App, which could be not fit with you. Feel free to not use it if you dont want it. If you dont use it, you definitely gonna need to tweak the `Template Library` for the menu part and also the `datatables`.
