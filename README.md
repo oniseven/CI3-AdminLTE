@@ -33,9 +33,9 @@ But I suggest you to create your own template library file base on your Admin Te
 - That's it. You are good to go, just open your browser and go to <http://localhost/yourappname>.
 - Have fun.
 
-## Usage
+## Template Library Usage
 
-### Template Library
+### Details
 - Location: `application/libraries`
 - filename: `Template.php`
 
