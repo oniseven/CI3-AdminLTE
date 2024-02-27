@@ -214,7 +214,7 @@ Honestly I hate to repeat my self to type the same function again and again a cr
 	<tr>
 		<td><code>$db_group</code></td>
 		<td>default</td>
-		<td>This a database group that had been you set on the config database file, by default the group name is <b>default</b>, but if you have multiple database connection with different group name you can set the group name in here</td>
+		<td>This a database group that had been you set on the config database file, by default the group name is <code>default</code>, but if you have multiple database connection with different group name you can set the group name in here</td>
 	</tr>
   <tr>
     <td><code>$db_name</code></td>
