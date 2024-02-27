@@ -1,3 +1,12 @@
+----
+
+# Index
+
+* [What is CI3-AdminLTE](https://github.com/oniseven/CI3-AdminLTE/tree/main?tab=readme-ov-file#what-is-ci3-adminlte-codeigiter-3113--adminlte-320)
+* [Can I use it with other Admin Template?](https://github.com/oniseven/CI3-AdminLTE/tree/main?tab=readme-ov-file#can-i-use-it-with-other-admin-template)
+
+----
+
 ## What is CI3-AdminLTE (Codeigiter 3.1.13 + AdminLTE 3.2.0)
 
 The journey began when I sought the optimal method to seamlessly integrate an Admin Template with CodeIgniter 3. Exploring various approaches, including Core, Helper, and Library implementations, I experimented with each method. Ultimately, I discovered that the choice between these approaches is subjective, dependent on personal preference. Any method can be employed, as long as it aligns with your ease of understanding and accomplishes your objectives. In this repository, I adopted the Library approach, finding it notably more convenient for maintenance compared to alternative methods. 
