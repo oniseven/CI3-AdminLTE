@@ -201,7 +201,7 @@ Honestly I hate to repeat my self to type the same function again and again a cr
 - Location: `application/core`
 - filename: `MY_Model.php`
 
-### Variables
+### Public Variables
 
 <table>
 	<tr>
@@ -210,11 +210,78 @@ Honestly I hate to repeat my self to type the same function again and again a cr
 		<td>Description</td>
 	</tr>
 	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
+		<td>`$db_group`</td>
+		<td>default</td>
+		<td>This a database group that had been you set on the config database file, by default the group name is 'default', but if you have multiple database connection with different group name you can set the group name in here</td>
 	</tr>
+  <tr>
+    <td>`$db_name`</td>
+    <td>NULL</td>
+    <td>This database name is used only if you want to access different database within the same database group</td>
+  </tr>
+  <tr>
+    <td>`$table`*</td>
+    <td></td>
+    <td>Current table name that used by the model, this is mandatory</td>
+  </tr>
+  <tr>
+    <td>`$alias`</td>
+    <td>NULL</td>
+    <td>If you want to set an alias for your table, you can set it here</td>
+  </tr>
+  <tr>
+    <td>`$id_column_name`</td>
+    <td>id</td>
+    <td>We do know that most of table has their own primary id, and usually the column name is `id`, but if somehow you decided to name the column differently like `not_id` maybe, then you better set this to that name</td>
+  </tr>
+  <tr>
+    <td>`$allow_columns`</td>
+    <td>NULL</td>
+    <td>List of allowed column for the table, make sure its in array, once again it must be an array</td>
+  </tr>
 </table>
+
+### Creating Model extends MY_Model
+
+```php
+  // Location: application/models
+  // Filename: Users.php
+
+  class Users extends MY_Model {
+    public $table = "users";
+    public $alias = "u";
+
+    // 
+    public $allowed_columns = [
+      'id', 
+      'fullname', 
+      'username', 
+      'password',
+      'email', 
+      'is_active'
+    ];
+  }
+```
+
+or if you use different database name within the same group connection
+
+```php
+  class Users extends MY_Model {
+    public $db_name = "finance";
+    public $table = "users";
+    public $alias = "usr";
+  }
+```
+
+of if you want to declare a model with different group connection
+
+```php
+  class Users extends MY_Model {
+    public $db_group = "db_conn_group_2";
+    public $table = "users";
+    public $alias = "usr";
+  }
+```
 
 ## Resources
 
