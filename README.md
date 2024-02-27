@@ -2,12 +2,28 @@
 
 # Index
 
-* [What is CI3-AdminLTE](https://github.com/oniseven/CI3-AdminLTE/tree/main?tab=readme-ov-file#what-is-ci3-adminlte-codeigiter-3113--adminlte-320)
-* [Can I use it with other Admin Template?](https://github.com/oniseven/CI3-AdminLTE/tree/main?tab=readme-ov-file#can-i-use-it-with-other-admin-template)
+* [What is CI3-AdminLTE](#what-is-ci3-adminlte-codeigiter-3113--adminlte-320)
+* [Can I use it with other Admin Template?](#can-i-use-it-with-other-admin-template)
+* [Server Requirements](#server-requirements)
+* [Installation](#installations)
+* [Template Library Usage](#template-library-usage)
+  * [Details](#details)
+  * [Load The Template](#details)
+  * [Set Page Type](#set-page-type)
+  * [Set Page Title]()
+  * [Use Plugins]()
+  * [Set Custom Class]()
+  * [Add Custom Page CSS]()
+  * [Add Custom Page JS]()
+  * [Hide Toolbar Content]()
+  * [Hide Breadcrums]()
+  * [Hide Footer]()
+  * [Hides a couble things]()
+  * [Examples]()
 
 ----
 
-## What is CI3-AdminLTE (Codeigiter 3.1.13 + AdminLTE 3.2.0)
+# What is CI3-AdminLTE (Codeigiter 3.1.13 + AdminLTE 3.2.0)
 
 The journey began when I sought the optimal method to seamlessly integrate an Admin Template with CodeIgniter 3. Exploring various approaches, including Core, Helper, and Library implementations, I experimented with each method. Ultimately, I discovered that the choice between these approaches is subjective, dependent on personal preference. Any method can be employed, as long as it aligns with your ease of understanding and accomplishes your objectives. In this repository, I adopted the Library approach, finding it notably more convenient for maintenance compared to alternative methods. 
 
@@ -17,7 +33,7 @@ So if you are looking for a ready to use CodeIgniter 3 with AdminLTE Template, f
 
 This repo also come with `Datatables` example usage and different concept of using `Model` and `Core Model` and also `Dynamic Menus`. That might gonna need a tweak here and there depend on your personal preference.
 
-## Can I use it with other Admin Template?
+# Can I use it with other Admin Template?
 
 If what you mean by use is using the concept? Then yes, you can use the concept of templating in this repo with another Admin Template that you want. 
 You could still use this template library by adjusting a couple things like:
@@ -27,13 +43,13 @@ You could still use this template library by adjusting a couple things like:
 
 But I suggest you to create your own template library file base on your Admin Template, and implement the concept of this repo template library. Because every admin template have their own unique points, fitures, and structures that might not fit with the template library that I create in here which is solely based on `AdminLTE 3.2.0`.
 
-## Server Requirements
+# Server Requirements
 
 - PHP version 7 or newer (It has to be 7+ because I use `??` in some of the code)
 - MySQL Server (Testing in MariaDB 10.5.4)
 - Composer
 
-## Installations
+# Installations
 
 - Clone this to your php server, you could use XAMPP or any kind of PHP server.
 - Import the demo database `demo_database_cignadlte.sql` to MySQL database server that you have.
@@ -42,7 +58,7 @@ But I suggest you to create your own template library file base on your Admin Te
 - That's it. You are good to go, just open your browser and go to <http://localhost/yourappname>.
 - Have fun.
 
-## Template Library Usage
+# Template Library Usage
 
 ### Details
 - Location: `application/libraries`
