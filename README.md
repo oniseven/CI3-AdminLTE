@@ -378,6 +378,13 @@ $params = [
   ]
 ];
 
+// this will be converted to
+/**
+ * $this->db->set(data)
+ *          ->set(data_false, '', false)
+ *          ->insert(table_name)
+ **/
+
 // calling insert method
 $query = $this->users->insert($params);
 
@@ -392,6 +399,7 @@ if(!$query->status) {
 ### Update Data
 
 This update method also only accept one `array` parameter, which contain index below.
+
 **There are no index checker, so becareful with it.**
 
 <table>
@@ -412,7 +420,7 @@ This update method also only accept one `array` parameter, which contain index b
   </tr>
   <tr>
     <td><code>where</code></td>
-    <td><code>array</code></td>
+    <td><code>array | string</code></td>
     <td>Most of the time you will use this index to filter the data</td>
   </tr>
   <tr>
@@ -456,6 +464,17 @@ $params = [
   ]
 ];
 
+// this will be converted to
+/**
+ * $this->db->set(data)
+ *          ->set(data_false, '', false)
+ *          ->where(where)
+ *          ->where_in(1st_where_in_column, 1st_where_in_value)
+ *          ->where_in(2st_where_in_column, 2st_where_in_value)   // if you have more where in
+ *          ->where_in(n_where_in_column, n_where_in_value)       // if you have more where in
+ *          ->update(table)
+ **/
+
 // calling the update method
 $query = $this->users->update($params);
 
@@ -470,6 +489,7 @@ if(!$query->status) {
 ### Delete Data
 
 This update method also only accept one `array` parameter, which contain index below.
+
 **There are no index checker, so becareful with it.**
 
 <table>
@@ -515,6 +535,14 @@ $params = [
     ['column' => 'id', 'value' => [1, 2, 3]],
   ]
 ];
+
+// this will be converted to
+/**
+ * $this->db->where(where)
+ *          ->where_in(1st_where_in_column, 1st_where_in_value)
+ *          ->where_in(n_where_in_column, n_where_in_value)     // if you have more where in
+ *          ->update(table)
+ **/
 
 // calling the method
 $query = $this->users->delete($params);
