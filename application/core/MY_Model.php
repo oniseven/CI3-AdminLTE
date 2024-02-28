@@ -188,6 +188,7 @@ class MY_Model extends CI_Model {
    * Get Data SQL Function
    * 
    * @param array $configs
+   * @param boolean $last_query
    * 
    * @return object
    */
@@ -215,16 +216,22 @@ class MY_Model extends CI_Model {
 
     if(array_key_exists('join', $configs)){
       $join = $configs['join'];
-      $escJoin = $join['escape'] ?? NULL;
-      // $escJoin = check_data_array('escape', $join, NULL);
-      $db->join($join['table'], $join['on'], $join['type'], $escJoin);
+      $db->join(
+        $join[0] ?? $join['table'], 
+        $join[1] ?? $join['on'], 
+        $join[2] ?? $join['type'], 
+        $join[3] ?? $join['escape'] ?? NULL
+      );
     }
 
     if(array_key_exists('joins', $configs)){
       foreach ($configs['joins'] as $join) {
-        $escJoin = $join['escape'] ?? NULL;
-        // $escJoin = check_data_array('escape', $join, NULL);
-        $db->join($join['table'], $join['on'], $join['type'], $escJoin);
+        $db->join(
+          $join[0] ?? $join['table'], 
+          $join[1] ?? $join['on'], 
+          $join[2] ?? $join['type'], 
+          $join[3] ?? $join['escape'] ?? NULL
+        );
       }
     }
 
@@ -243,42 +250,45 @@ class MY_Model extends CI_Model {
           $data[2] ?? $data['escape'] ?? NULL,
         );
       }
-      // $whereIn = $configs['where_in'];
-      // $escWhereIn = $whereIn['escape'] ?? NULL;
-      // // $escWhereIn = check_data_array('escape', $whereIn, NULL);
-      // $db->where_in($whereIn['column'], $whereIn['value'], $escWhereIn);
     }
 
     if(array_key_exists('where_not_in', $configs)){
-      $whereNotIn = $configs['where_not_in'];
-      $escWhereNoIn = $whereNotIn['escape'] ?? NULL;
-      // $escWhereNoIn = check_data_array('escape', $whereNotIn, NULL);
-      $db->where_not_in($whereNotIn['column'], $whereNotIn['value'], $escWhereNoIn);
-    }
-
-    if(array_key_exists('where_not_ins', $configs)){
-      foreach ($configs['where_not_ins'] as $whereNotIn) {
-        $escWhereNoIn = $whereNotIn['escape'] ?? NULL;
-        // $escWhereNoIn = check_data_array('escape', $whereNotIn, NULL);
-        $db->where_not_in($whereNotIn['column'], $whereNotIn['value'], $escWhereNoIn);
+      $where_not_in = $configs['where_not_in'];
+      foreach ($where_not_in as $key => $data) {
+        $db->where_not_in(
+          $data[0] ?? $data['column'], 
+          $data[1] ?? $data['value'], 
+          $data[2] ?? $data['escape'] ?? NULL, 
+        );
       }
     }
 
     if(array_key_exists('or_where', $configs))
       $db->or_where($configs['or_where']);
+
+    if(array_key_exists('or_where_false', $configs))
+      $db->or_where($configs['or_where_false'], '', FALSE);
     
     if(array_key_exists('or_where_in', $configs)){
-      $orWhereIn = $configs['or_where_in'];
-      $escOrWhereIn = $orWhereIn['escape'] ?? NULL;
-      // $escOrWhereIn = check_data_array('escape', $orWhereIn, NULL);
-      $db->where_in($orWhereIn['column'], $orWhereIn['value'], $escOrWhereIn);
+      $or_where_in = $configs['or_where_in'];
+      foreach ($or_where_in as $key => $data) {
+        $db->or_where_in(
+          $data[0] ?? $data['column'], 
+          $data[1] ?? $data['value'], 
+          $data[2] ?? $data['escape'] ?? NULL, 
+        );
+      }
     }
 
     if(array_key_exists('or_where_not_in', $configs)){
-      $orWhereNotIn = $configs['or_where_not_in'];
-      $escOrWhereNoIn = $orWhereNotIn['escape'] ?? NULL;
-      // $escOrWhereNoIn = check_data_array('escape', $orWhereNotIn, NULL);
-      $db->where_not_in($orWhereNotIn['column'], $orWhereNotIn['value'], $escOrWhereNoIn);
+      $or_where_not_in = $configs['or_where_not_in'];
+      foreach ($or_where_in as $key => $data) {
+        $db->or_where_not_in(
+          $data[0] ?? $data['column'], 
+          $data[1] ?? $data['value'], 
+          $data[2] ?? $data['escape'] ?? NULL, 
+        );
+      }
     }
 
     if(array_key_exists('group_where', $configs)){
@@ -334,43 +344,43 @@ class MY_Model extends CI_Model {
 
     if(array_key_exists('like', $configs)){
       $like = $configs['like'];
-      $column = "lower(". $like['column'] .")";
-      $db->like($column, $like['keyword'], $like['type'] ?? 'both');
+      foreach ($like as $key => $data) {
+        $column = $data[0] ?? $data['column'];
+        $db->like(
+          "lower({$column})", 
+          $data[1] ?? $data['keyword'], 
+          $data[2] ?? $data['type'] ?? 'both'
+        );
+      }
     }
 
-    if(array_key_exists('likes', $configs)){
-      foreach ($configs['likes'] as $like) {
-        $column = "lower(". $like['column'] .")";
-        $db->like($column, $like['keyword'], $like['type'] ?? 'both');
+    if(array_key_exists('or_like', $configs)){
+      $or_like = $configs['or_like'];
+      foreach ($or_like as $key => $data) {
+        $db->or_like(
+          $data[0] ?? $data['column'], 
+          $data[1] ?? $data['keyword'], 
+          $data[2] ?? $data['type'] ?? 'both'
+        );
       }
     }
 
     if(array_key_exists('like_array', $configs))
       $db->like($configs['like_array']);
 
-    if(array_key_exists('or_like', $configs)){
-      $orLike = $configs['or_like'];
-      $column = "lower(". $orLike['column'] .")";
-      $db->or_like($column, $orLike['keyword'], $orLike['type'] ?? 'both');
-    }
-
-    if(array_key_exists('or_likes', $configs)){
-      foreach ($configs['or_likes'] as $orLike) {
-        $column = "lower(". $orLike['column'] .")";
-        $db->or_like($column, $orLike['keyword'], $orLike['type'] ?? 'both');
-      }
-    }
-
     if(array_key_exists('or_like_array', $configs))
       $db->or_like($configs['or_like_array']);
 
-    if(array_key_exists('order_by', $configs))
-      $db->order_by($configs['order_by']);
-
-    if(array_key_exists('orders', $configs)){
-      foreach ($configs['orders'] as $order) {
-        $db->order_by($order['column'], $order['dir']);
-      }
+    if(array_key_exists('order_by', $configs)){
+      if(!is_array($configs['order_by']))
+        $db->order_by($configs['order_by']);
+      else
+        foreach ($configs['order_by'] as $order) {
+          $db->order_by(
+            $order[0] ?? $order['column'], 
+            $order[1] ?? $order['dir'] ?? 'ASC'
+          );
+        }
     }
 
     if(array_key_exists('group_by', $configs))
@@ -379,7 +389,10 @@ class MY_Model extends CI_Model {
     if(array_key_exists('limit', $configs)){
       $limit = $configs['limit'];
       (is_array($limit))
-        ? $db->limit($limit['length'], $limit['start'])
+        ? $db->limit(
+          $limit[0] ?? $limit['length'], 
+          $limit[1] ?? $limit['start']
+        )
           : $db->limit($limit);
     }
 
@@ -392,7 +405,7 @@ class MY_Model extends CI_Model {
     if(array_key_exists('table', $configs) && !empty($configs['table']))
       $table_name_as = $configs['table'];
 
-    if(array_key_exists('compile_select', $configs)){
+    if(array_key_exists('compile_select', $configs) && $configs['compile_select']){
       return $db->get_compiled_select($table_name_as);
     }
 
