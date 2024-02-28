@@ -37,6 +37,8 @@
       * [Example](#example-5)
     * [Find By](#find-by)
       * [Example](#example-6)
+    * [Find Data](#find-data)
+      * [Example](#example-7)
 * [Resources](#resources)
 
 ----
