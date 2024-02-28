@@ -624,7 +624,7 @@ This method is use to get all the data in the table without any filter and no LI
     <td>Description</td>
   </tr>
   <tr>
-    <td><code>$columns</code></td>
+    <td><code>$column</code></td>
     <td><code>string | array</code></td>
     <td><code>*</code></td>
     <td>List column to show</td>
