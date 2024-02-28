@@ -648,8 +648,8 @@ $query = $this->users->get_all();
 
 // this will be converted to
 /**
- * $this->db->select(column, escape)
- *          ->from(table)
+ * $this->db->select('*', NULL)
+ *          ->from(users)
  *          ->get()
  **/
 
