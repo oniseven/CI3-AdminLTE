@@ -5,7 +5,7 @@ class MY_Model extends CI_Model {
   /**
    * @var string      $db_group     Contain group database that been use in config/database.php, default "default"
    * @var string|NULL $db_name      Database name, use when the table has different database name but still 
-   *                           on the same group of database, default "NULL"
+   *                                on the same group of database, default "NULL"
    * @var string      $table                          Table name
    * @var string      $alias                          Table alias name
    * @var string      $id_column_name                 Table id column name
@@ -43,12 +43,14 @@ class MY_Model extends CI_Model {
   /**
    * Get Table Name
    * 
+   * @var boolean $with_alias     default is true, if its true, then it will return the table name with alias
+   * 
    * @return string
    */
-  public function get_table_name(){
+  public function get_table_name($with_alias = true){
     $table_name = (!empty($this->db_name) ? "{$this->db_name}." : "") . $this->table;
 
-    if(!empty($this->alias)) $table_name .= " AS {$this->alias}";
+    if($with_alias && !empty($this->alias)) $table_name .= " AS {$this->alias}";
 
     return $table_name;
   }
@@ -87,11 +89,14 @@ class MY_Model extends CI_Model {
   /**
    * Insert/Create New Data
    * 
-   * @param array $params
+   * @param array $params     contain data and data_false index. If you want to prevent data from being escaped, pass it to data_false index.
    * 
    * @return object
    */
   public function insert($params){
+    if(!array_key_exists('data', $params) && !array_key_exists('data_false'))
+      throw new Exception("There are no data to create!", 1);
+
     if(!empty($this->allowed_columns) && !$this->is_column_allowed($params))
       throw new Exception("Data contain not allowed columns", 1);
 
@@ -101,7 +106,7 @@ class MY_Model extends CI_Model {
     if(array_key_exists('data_false', $params)) 
       $db->set($params['data_false'], '', false);
 
-    $table_name = (!empty($this->db_name) ? "{$this->db_name}." : "") . $this->table;
+    $table_name = $this->get_table_name(false);
 
     $query = $db->insert($table_name);
     $query->status = $query ? true : false;
@@ -134,7 +139,12 @@ class MY_Model extends CI_Model {
 
     if(array_key_exists('where_in', $params)){
       $where_in = $params['where_in'];
-      $db->where_in($where_in['column'], $where_in['value']);
+      foreach ($where_in as $key => $data) {
+        $db->where_in(
+          $data[0] ?? $data['column'], 
+          $data[1] ?? $data['value']
+        );
+      }
     }
 
     $query = $db->update($this->table_name);
@@ -160,7 +170,12 @@ class MY_Model extends CI_Model {
 
     if(array_key_exists('where_in', $params)){
       $where_in = $params['where_in'];
-      $db->where_in($where_in['column'], $where_in['value']);
+      foreach ($where_in as $key => $data) {
+        $db->where_in(
+          $data[0] ?? $data['column'], 
+          $data[1] ?? $data['value']
+        );
+      }
     }
 
     $query = $db->delete($this->table_name);
@@ -403,15 +418,20 @@ class MY_Model extends CI_Model {
    * 
    * @return object
    */
-  public function find_by_id($id, $id_column = "id", $select = "*", $escape = NULL, $distinct = FALSE){
+  public function find_by_id(
+    $value, 
+    $column_name = "id", 
+    $select = "*", 
+    $escape = NULL, 
+    $distinct = FALSE
+  ) {
     $db = $this->db_init();
-    // $table_name = $this->get_table_name();
 
     if($distinct) $db->distinct();
 
     $query = $db->select($select, $escape)
       ->from($this->table_name)
-      ->where($id_column, $id)
+      ->where($column_name, $value)
       ->get();
     $query->status = $query && $query->num_rows() ? true : false;
     
@@ -428,12 +448,12 @@ class MY_Model extends CI_Model {
    * 
    * @return object
    */
-  public function find_by($column, $value, $select = '*', $escape = NULL){
+  public function find_by($column_name, $value, $select = '*', $escape = NULL){
     $db = $this->db_init();
 
     $query = $db->select($select, $escape)
       ->from($this->table_name)
-      ->where($column, $value)
+      ->where($column_name, $value)
       ->get();
     $query->status = $query && $query->num_rows() ? true : false;
 
@@ -450,9 +470,8 @@ class MY_Model extends CI_Model {
    */
   public function get_all($column = "*", $escape = NULL){
     $db = $this->db_init();
-    // $table_name = $this->get_table_name();
 
-    $query = $db->select($column)
+    $query = $db->select($column, $escape)
       ->from($this->table_name)
       ->get();
     $query->status = $query && $query->num_rows() ? true : false;
