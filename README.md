@@ -336,12 +336,35 @@ of if you want to declare a model with different group connection
 
 ----
 
-## Examples Modal Usage
+## Core Model Fiturs
+
+Most of the methods in this core function are accepting an Array parameter.
 
 ### Insert Data
 
+Just like the method name, this method is use to insert / create new data to the table. 
+This method accept `array` which should contain at least one of the index below
+
+<table>
+  <tr>
+    <td>Index<td>
+    <td>Type<td>
+    <td>Description<td>
+  </tr>
+  <tr>
+    <td><code>data</code><td>
+    <td><code>array</code><td>
+    <td>Most of the time you will use this index to store the data<td>
+  </tr>
+  <tr>
+    <td><code>data_false</code><td>
+    <td><code>array</code><td>
+    <td>Use this parameter to prefer data form being escaped<td>
+  </tr>
+</table>
+
 ```php
-// load model
+// load the model
 $this->load->model('users');
 
 // set all the data
