@@ -795,6 +795,378 @@ if(!$query->status) {
 }
 ````
 
+----
+
+### Find Data
+
+This update method only accept 2 parameter: 
+
+1. `$configs` type `array`,
+2. `$last_query` type `boolean` default `false`
+
+With `$configs` contain index below:
+
+**There are no index checker, so becareful with it.**
+
+<table>
+  <tr>
+    <td>Index</td>
+    <td>Type</td>
+    <td>Default</td>
+    <td>Description</td>
+  </tr>
+  <tr>
+    <td><code>select</code></td>
+    <td><code>array|string</code></td>
+    <td><code>id_column_name</code></td>
+    <td>List of column to show using select query builder, if you didn't declare it, it will fill with primary key id that been declare on the model</td>
+  </tr>
+  <tr>
+    <td><code>distinct</code></td>
+    <td><code>boolean</code></td>
+    <td><code>false</code></td>
+    <td>Using distinct query builder</td>
+  </tr>
+  <tr>
+    <td><code>escape</code></td>
+    <td><code>boolean | NULL</code></td>
+    <td><code>NULL</code></td>
+    <td>prevent escape string for selected column</td>
+  </tr>
+  <tr>
+    <td><code>join</code></td>
+    <td><code>array</code></td>
+    <td></td>
+    <td>Using join quiery builder, with only one table</td>
+  </tr>
+  <tr>
+    <td><code>joins</code></td>
+    <td><code>array</code></td>
+    <td></td>
+    <td>using join query builder, with multiple table</td>
+  </tr>
+  <tr>
+    <td><code>where</code></td>
+    <td><code>array</code></td>
+    <td></td>
+    <td>Using where query builder</td>
+  </tr>
+  <tr>
+    <td><code>where_false</code></td>
+    <td><code>array</code></td>
+    <td></td>
+    <td>Using where query builder with escape string as FALSE</td>
+  </tr>
+  <tr>
+    <td><code>where_in</code></td>
+    <td><code>array</code></td>
+    <td></td>
+    <td>Using where_in query builder</td>
+  </tr>
+  <tr>
+    <td><code>where_not_in</code></td>
+    <td><code>array</code></td>
+    <td></td>
+    <td>Using where_not_in query builder</td>
+  </tr>
+  <tr>
+    <td><code>or_where</code></td>
+    <td><code>array</code></td>
+    <td></td>
+    <td>Using or_where query builder</td>
+  </tr>
+  <tr>
+    <td><code>or_where_in</code></td>
+    <td><code>array</code></td>
+    <td></td>
+    <td>Using or_where_in query builder</td>
+  </tr>
+  <tr>
+    <td><code>or_where_not_in</code></td>
+    <td><code>array</code></td>
+    <td></td>
+    <td>Using or_where_not_in query builder</td>
+  </tr>
+  <tr>
+    <td><code>like</code></td>
+    <td><code>array</code></td>
+    <td></td>
+    <td>Using like query builder</td>
+  </tr>
+  <tr>
+    <td><code>or_like</code></td>
+    <td><code>array</code></td>
+    <td></td>
+    <td>Using or_like query builder</td>
+  </tr>
+  <tr>
+    <td><code>like_array</code></td>
+    <td><code>array</code></td>
+    <td></td>
+    <td>Using like query builder but passing array as data</td>
+  </tr>
+  <tr>
+    <td><code>or_like_array</code></td>
+    <td><code>array</code></td>
+    <td></td>
+    <td>Using or_like query builder but passing array as data</td>
+  </tr>
+  <tr>
+    <td><code>order_by</code></td>
+    <td><code>string | array</code></td>
+    <td></td>
+    <td>Using order_by query builder with string value</td>
+  </tr>
+  <tr>
+    <td><code>group_by</code></td>
+    <td><code>array | string</code></td>
+    <td></td>
+    <td>Using group_by query builder</td>
+  </tr>
+  <tr>
+    <td><code>limit</code></td>
+    <td><code>integer | array</code></td>
+    <td></td>
+    <td>Using limit query builder</td>
+  </tr>
+  <tr>
+    <td><code>table_alias</code></td>
+    <td><code>string</code></td>
+    <td></td>
+    <td>Using different table alias</td>
+  </tr>
+  <tr>
+    <td><code>table</code></td>
+    <td><code>string</code></td>
+    <td></td>
+    <td>Using other table as pivot</td>
+  </tr>
+  <tr>
+    <td><code>compile_select</code></td>
+    <td><code>boolean</code></td>
+    <td></td>
+    <td>Using get_compiled_select query builder</td>
+  </tr>
+  <tr>
+    <td><code>count_all_results</code></td>
+    <td><code>boolean</code></td>
+    <td></td>
+    <td>To return count all result value</td>
+  </tr>
+  <tr>
+    <td><code>count_all</code></td>
+    <td><code>boolean</code></td>
+    <td></td>
+    <td>To return count all value</td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      <b>PS: You can add more index variant if you want according to your need</b>
+    </td>
+  </tr>
+</table>
+
+#### Example
+
+````php
+// load a model
+$this->load->model('users');
+
+// set the configs parameter
+// remember you don't have to use all of it, use it according to your need
+$configs = [
+  'select' => ['id', 'name', 'email'],
+  // or
+  'select' => 'id, name, email',
+
+  'distinct' => true, // or false - default false
+  'escape' => true, // or false - default false
+
+  // joining with one table
+  'join' => [
+    'user_privilege as up',
+    'up.user_id = u.id',
+    'inner',
+    FALSE // or NULL or TRUE or do not declare it
+  ],
+  // or
+  'join' => [
+    'table' => 'user_privilege as up',
+    'on' => 'up.user_id = u.id',
+    'type' => 'inner',
+    'escape' => FALSE // or NULL or TRUE or do not declare it
+  ],
+
+  // joining multiple table
+  'joins' => [
+    [
+      'user_privilege as up',
+      'up.user_id = u.id',
+      'inner',
+    ],
+    [
+      'table' => 'user_invoice as ui',
+      'on' => 'ui.user_id = u.id',
+      'type' => 'inner',
+    ]
+  ],
+
+  'where' => [
+    'id' => 2
+  ],
+
+  'where_false' => [
+    'YEAR(u.birthdate)' => 1998
+  ],
+
+  'where_in' => [
+    [
+      'id',       // column
+      [1, 2, 3],  // value
+      NULL,       // escape, you can exclude this
+    ],
+    [
+      'column' => 'invoice_type',
+      'value' => 3,
+      'escape' => NULL, // you can exclude this
+    ]
+  ],
+
+  'where_not_in' => [
+    [
+      'id',       // column
+      [1, 2, 3],  // value
+      NULL,       // escape, you can exclude this
+    ],
+    [
+      'column' => 'invoice_type',
+      'value' => 3,
+      'escape' => NULL, // you can exclude this
+    ]
+  ],
+
+  'or_where' => [
+    'id' => 2
+  ],
+
+  'or_where_false' => [
+    'YEAR(u.birthdate)' => 1998
+  ],
+
+  'or_where_in' => [
+    [
+      'id',       // column
+      [1, 2, 3],  // value
+      NULL,       // escape, you can exclude this
+    ],
+    [
+      'column' => 'invoice_type',
+      'value' => 3,
+      'escape' => NULL, // you can exclude this
+    ]
+  ],
+
+  'or_where_not_in' => [
+    [
+      'id',       // column
+      [1, 2, 3],  // value
+      NULL,       // escape, you can exclude this
+    ],
+    [
+      'column' => 'invoice_type',
+      'value' => 3,
+      'escape' => NULL, // you can exclude this
+    ]
+  ],
+
+  'like' => [
+    [
+      'username', 
+      'john', 
+      'both' // you can exclude this
+    ],
+    [
+      'column' => 'email',
+      'keyword' => 'doe',
+      'type' => 'both', // you can exclude this
+    ]
+  ],
+
+  'or_like' => [
+    [
+      'username', 
+      'john', 
+      'both' // you can exclude this
+    ],
+    [
+      'column' => 'email',
+      'keyword' => 'doe',
+      'type' => 'both', // you can exclude this
+    ]
+  ],
+
+  'like_array' => [
+    'username' => 'john',
+    'email' => 'doe'
+  ],
+
+  'or_like_array' => [
+    'username' => 'john',
+    'email' => 'doe'
+  ],
+
+  'order_by' => 'username ASC, email DESC',
+  // or
+  'order_by' => [
+    [
+      'username', // column
+      'ASC'       // direction
+    ],
+    [
+      'column' => 'email',
+      'dir' => 'DESC'
+    ]
+  ],
+
+  'group_by' => 'id',
+  // or
+  'group_by' => ['id', 'username'],
+
+  'limit' => 10,
+  // or
+  'limit' => [
+    10, // length
+    20  // start / offset
+  ]
+  // or
+  'limit' => [
+    'length' => 10,
+    'start' => 20
+  ],
+
+  'table_alias' => 'usr', // make sure if you set this up then use this alias
+
+  'table' => 'settings as s', // its kinda rare to use it. I use it when I'm lazy to load the model its self so I just using the existing model that had been loaded but overide the table name
+
+  'compile_select' => true, // you can exclude this, default is false,
+
+  'count_all_result' => true, // will return integer
+
+  'count_all' => true, // will return integer
+];
+
+// calling the method
+$query = $this->users->find($configs);
+
+// check the query status
+// if query is fail or num_rows is 0, status value will be false
+if(!$query->status) {
+  // do something here if its false
+} else {
+  // do something here if its true
+}
+````
+
 # Resources
 
 -  Codeigniter <https://codeigniter.com/docs>
