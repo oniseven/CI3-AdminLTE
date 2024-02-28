@@ -987,14 +987,14 @@ $configs = [
     'user_privilege as up',
     'up.user_id = u.id',
     'inner',
-    FALSE // or NULL or TRUE or do not declare it
+    FALSE // or NULL or TRUE or just exclude it
   ],
   // or
   'join' => [
     'table' => 'user_privilege as up',
     'on' => 'up.user_id = u.id',
     'type' => 'inner',
-    'escape' => FALSE // or NULL or TRUE or do not declare it
+    'escape' => FALSE // or NULL or TRUE or just exclude it
   ],
 
   // joining multiple table
