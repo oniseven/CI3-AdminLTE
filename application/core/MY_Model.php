@@ -235,10 +235,18 @@ class MY_Model extends CI_Model {
       $db->where($configs['where_false'], '', false);
 
     if(array_key_exists('where_in', $configs)){
-      $whereIn = $configs['where_in'];
-      $escWhereIn = $whereIn['escape'] ?? NULL;
-      // $escWhereIn = check_data_array('escape', $whereIn, NULL);
-      $db->where_in($whereIn['column'], $whereIn['value'], $escWhereIn);
+      $where_in = $configs['where_in'];
+      foreach ($where_in as $key => $data) {
+        $db->where_in(
+          $data[0] ?? $data['column'], 
+          $data[1] ?? $data['value'],
+          $data[2] ?? $data['escape'] ?? NULL,
+        );
+      }
+      // $whereIn = $configs['where_in'];
+      // $escWhereIn = $whereIn['escape'] ?? NULL;
+      // // $escWhereIn = check_data_array('escape', $whereIn, NULL);
+      // $db->where_in($whereIn['column'], $whereIn['value'], $escWhereIn);
     }
 
     if(array_key_exists('where_not_in', $configs)){
