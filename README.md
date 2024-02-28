@@ -22,7 +22,11 @@
   * [Details](#details-1)
   * [Public Variables](#public-variables)
   * [Examples Creating Model extends MY_Model](#examples-creating-model-extends-my_model)
-  * [Examples Model Usage](#examples-model-usage)
+  * [Core Model Fiturs](#core-model-fiturs)
+    * [Query](#query)
+    * [Insert Data](#insert-data)
+    * [Update Data](#update-data)
+    * [Delete Data](#delete-data)
 * [Resources](#resources)
 
 ----
@@ -337,6 +341,30 @@ of if you want to declare a model with different group connection
 ----
 
 ## Core Model Fiturs
+
+### Query SQL
+
+Well it just literaly an sql query. LOL
+
+#### Example
+
+````php
+// load model
+$this->load->model('users');
+
+// sql query
+$sql = "SELECT id, fullname FROM users WHERE is_active = 1";
+
+// call the method
+$query = $this->users->query($sql);
+
+// check the query status
+if(!$query->status) {
+  // do something here if its false
+} else {
+  // do something here if its true
+}
+````
 
 ### Insert Data
 
