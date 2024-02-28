@@ -23,10 +23,14 @@
   * [Public Variables](#public-variables)
   * [Examples Creating Model extends MY_Model](#examples-creating-model-extends-my_model)
   * [Core Model Fiturs](#core-model-fiturs)
-    * [Query](#query)
+    * [Query SQL](#query-sql)
+      * [Example](#example)
     * [Insert Data](#insert-data)
+      * [Example](#example-1)
     * [Update Data](#update-data)
+      * [Example](#example-2)
     * [Delete Data](#delete-data)
+      * [Example](#example-3)
 * [Resources](#resources)
 
 ----
