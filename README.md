@@ -338,12 +338,10 @@ of if you want to declare a model with different group connection
 
 ## Core Model Fiturs
 
-Most of the methods in this core function are accepting an Array parameter.
-
 ### Insert Data
 
 Just like the method name, this method is use to insert / create new data to the table. 
-This method accept `array` which should contain at least one of the index below
+This method accept one `array` parameter which should contain at least one of the index below
 
 <table>
   <tr>
@@ -359,9 +357,11 @@ This method accept `array` which should contain at least one of the index below
   <tr>
     <td><code>data_false</code><td>
     <td><code>array</code><td>
-    <td>Use this parameter to prefer data form being escaped<td>
+    <td>Use this parameter to prevent data form being escaped<td>
   </tr>
 </table>
+
+#### Example
 
 ```php
 // load the model
@@ -378,19 +378,154 @@ $params = [
   ]
 ];
 
-// insert the data
+// calling insert method
 $query = $this->users->insert($params);
 
 // check the query status
-if(!$query->status) return false;
-
-return true;
+if(!$query->status) {
+  // do something here if its false
+} else {
+  // do something here if its true
+}
 ```
 
 ### Update Data
 
+This update method also only accept one `array` parameter, which contain index below.
+**There are no index checker, so becareful with it.**
+
+<table>
+  <tr>
+    <td>Index<td>
+    <td>Type<td>
+    <td>Description<td>
+  </tr>
+  <tr>
+    <td><code>data</code><td>
+    <td><code>array</code><td>
+    <td>Most of the time you will use this index for the data<td>
+  </tr>
+  <tr>
+    <td><code>data_false</code><td>
+    <td><code>array</code><td>
+    <td>Use this parameter to prevent data form being escaped<td>
+  </tr>
+  <tr>
+    <td><code>where</code><td>
+    <td><code>array</code><td>
+    <td>Most of the time you will use this index to filter the data<td>
+  </tr>
+  <tr>
+    <td><code>where_false</code><td>
+    <td><code>array</code><td>
+    <td>Use this filter to prevent data from being escaped<td>
+  </tr>
+  <tr>
+    <td><code>where_in</code><td>
+    <td><code>array</code><td>
+    <td>Generates a WHERE field IN<td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <b>PS: You can add more index variant if you want according to your need</b>
+    </td>
+  </td>
+</table>
+
+#### Example
+
+````php
+// load a model
+$this->load->model('users');
+
+// set the method parameter
+$params = [
+  'data' => [
+    'fullname' => 'John Doe',
+    'email' => 'john_doe@mail.com'
+  ],
+  'data_false' => [
+    'invoice_date' => 'CURDATE()'
+  ],
+  'where' => [
+    'id' => 1
+  ],
+  'where_in' => [
+    ['column' => 'invoice_type', 'value' => [1, 2, 3]],
+    ['column' => 'payment_type', 'value' => [1, 2]],
+  ]
+];
+
+// calling the update method
+$query = $this->users->update($params);
+
+// check the query status
+if(!$query->status) {
+  // do something here if its false
+} else {
+  // do something here if its true
+}
+````
+
 ### Delete Data
 
+This update method also only accept one `array` parameter, which contain index below.
+**There are no index checker, so becareful with it.**
+
+<table>
+  <tr>
+    <td>Index<td>
+    <td>Type<td>
+    <td>Description<td>
+  </tr>
+  <tr>
+    <td><code>where</code><td>
+    <td><code>array</code><td>
+    <td>Most of the time you will use this index to filter the data<td>
+  </tr>
+  <tr>
+    <td><code>where_false</code><td>
+    <td><code>array</code><td>
+    <td>Use this filter to prevent data from being escaped<td>
+  </tr>
+  <tr>
+    <td><code>where_in</code><td>
+    <td><code>array</code><td>
+    <td>Generates a WHERE field IN<td>
+  </tr>
+  <tr>
+    <td colspan="3">
+      <b>PS: You can add more index variant if you want according to your need</b>
+    </td>
+  </td>
+</table>
+
+#### Example
+
+````php
+// load a model
+$this->load->model('users');
+
+// set the method parameter
+$params = [
+  'where' => [
+    'group_access' => 1
+  ],
+  'where_in' => [
+    ['column' => 'id', 'value' => [1, 2, 3]],
+  ]
+];
+
+// calling the method
+$query = $this->users->delete($params);
+
+// check the query status
+if(!$query->status) {
+  // do something here if its false
+} else {
+  // do something here if its true
+}
+````
 
 # Resources
 
