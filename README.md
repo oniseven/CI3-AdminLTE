@@ -31,6 +31,12 @@
       * [Example](#example-2)
     * [Delete Data](#delete-data)
       * [Example](#example-3)
+    * [Get All Data](#get-all-data)
+      * [Example](#example-4)
+    * [Find By ID](#find-by-id)
+      * [Example](#example-5)
+    * [Find By](#find-by)
+      * [Example](#example-6)
 * [Resources](#resources)
 
 ----
@@ -714,6 +720,70 @@ $query = $this->users->find_by_id(13);
  * $this->db->select('*', NULL)
  *          ->from('users')
  *          ->where('id', 13)
+ *          ->get()
+ **/
+
+// check the query status
+if(!$query->status) {
+  // do something here if its false
+} else {
+  // do something here if its true
+}
+````
+
+----
+
+### Find By
+
+This method is use to get data by custom column, with below parameter
+
+<table>
+  <tr>
+    <td>Variable</td>
+    <td>Type</td>
+    <td>Default</td>
+    <td>Description</td>
+  </tr>
+  <tr>
+    <td><code>$column_name</code> *</td>
+    <td><code>string</code></td>
+    <td></td>
+    <td>Column name</td>
+  </tr>
+  <tr>
+    <td><code>$value</code> *</td>
+    <td><code>integer|string</code></td>
+    <td></td>
+    <td>Primary key id column name</td>
+  </tr>
+  <tr>
+    <td><code>$select</code></td>
+    <td><code>array|string</code></td>
+    <td><code>*</code></td>
+    <td>List of column to show</td>
+  </tr>
+  <tr>
+    <td><code>$escape</code></td>
+    <td><code>boolean | NULL</code></td>
+    <td><code>NULL</code></td>
+    <td>Escape String for select</td>
+  </tr>
+</table>
+
+#### Example
+
+````php
+// load a model
+$this->load->model('users');
+
+// calling the method
+$query = $this->users->find_by('is_active', 1);
+
+// this will be converted to
+/**
+ * $this->db->select('*', NULL)
+ *          ->from('users')
+ *          ->where('is_active', 1)
  *          ->get()
  **/
 
