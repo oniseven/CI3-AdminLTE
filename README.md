@@ -496,8 +496,9 @@ $params = [
     'YEAR(invoice_date)' => 2024
   ],
   'where_in' => [
-    ['column' => 'invoice_type', 'value' => [1, 2, 3]],
-    ['column' => 'payment_type', 'value' => [1, 2]],
+    ['invoice_type', [1, 2, 3]],                     // index 0 as column and index 1 as value
+    ['column' => 'payment_type', 'value' => [1, 2]], // you can also declare it with column and value key
+    // it will prioritize index 0 and 1 first rather than column and value key
   ]
 ];
 
@@ -575,7 +576,9 @@ $params = [
     'YEAR(birthdate)' => 1989
   ],
   'where_in' => [
-    ['column' => 'id', 'value' => [1, 2, 3]],
+    ['id', [1, 2, 3]],                          // index 0 as column and index 1 as value
+    ['column' => 'id', 'value' => [1, 2, 3]],   // you can also declare it with column and value key
+    // it will prioritize index 0 and 1 first rather than column and value key
   ]
 ];
 
