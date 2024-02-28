@@ -675,8 +675,8 @@ This method is use to get data by primary key id column, with below parameter
     <td>Description</td>
   </tr>
   <tr>
-    <td><code>$value</code></td>
-    <td><code>integer | string</code> *</td>
+    <td><code>$value</code> *</td>
+    <td><code>integer | string</code></td>
     <td></td>
     <td>Well its literally the value of the ID of course</td>
   </tr>
