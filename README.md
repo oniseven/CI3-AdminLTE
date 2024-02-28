@@ -382,7 +382,7 @@ $params = [
 /**
  * $this->db->set(data)
  *          ->set(data_false, '', false)
- *          ->insert(table_name)
+ *          ->insert(table)
  **/
 
 // calling insert method
@@ -541,7 +541,7 @@ $params = [
  * $this->db->where(where)
  *          ->where_in(1st_where_in_column, 1st_where_in_value)
  *          ->where_in(n_where_in_column, n_where_in_value)     // if you have more where in
- *          ->update(table)
+ *          ->delete(table)
  **/
 
 // calling the method
