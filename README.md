@@ -458,6 +458,9 @@ $params = [
   'where' => [
     'id' => 1
   ],
+  'where_false' => [
+    'YEAR(invoice_date)' => 2024
+  ],
   'where_in' => [
     ['column' => 'invoice_type', 'value' => [1, 2, 3]],
     ['column' => 'payment_type', 'value' => [1, 2]],
@@ -468,7 +471,8 @@ $params = [
 /**
  * $this->db->set(data)
  *          ->set(data_false, '', false)
- *          ->where(where)
+ *          ->where(where_value)
+ *          ->where(where_false_value, '', false)
  *          ->where_in(1st_where_in_column, 1st_where_in_value)
  *          ->where_in(2st_where_in_column, 2st_where_in_value)   // if you have more where in
  *          ->where_in(n_where_in_column, n_where_in_value)       // if you have more where in
@@ -531,6 +535,9 @@ $params = [
   'where' => [
     'group_access' => 1
   ],
+  'where_false' => [
+    'YEAR(birthdate)' => 1989
+  ],
   'where_in' => [
     ['column' => 'id', 'value' => [1, 2, 3]],
   ]
@@ -538,7 +545,8 @@ $params = [
 
 // this will be converted to
 /**
- * $this->db->where(where)
+ * $this->db->where(where_value)
+ *          ->where(where_false_value, ''. false)
  *          ->where_in(1st_where_in_column, 1st_where_in_value)
  *          ->where_in(n_where_in_column, n_where_in_value)     // if you have more where in
  *          ->delete(table)
