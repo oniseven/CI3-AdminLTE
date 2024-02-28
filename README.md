@@ -345,19 +345,19 @@ This method accept one `array` parameter which should contain at least one of th
 
 <table>
   <tr>
-    <td>Index<td>
-    <td>Type<td>
-    <td>Description<td>
+    <td>Index</td>
+    <td>Type</td>
+    <td>Description</td>
   </tr>
   <tr>
-    <td><code>data</code><td>
-    <td><code>array</code><td>
-    <td>Most of the time you will use this index to store the data<td>
+    <td><code>data</code></td>
+    <td><code>array</code></td>
+    <td>Most of the time you will use this index to store the data</td>
   </tr>
   <tr>
-    <td><code>data_false</code><td>
-    <td><code>array</code><td>
-    <td>Use this parameter to prevent data form being escaped<td>
+    <td><code>data_false</code></td>
+    <td><code>array</code></td>
+    <td>Use this parameter to prevent data form being escaped</td>
   </tr>
 </table>
 
@@ -396,40 +396,40 @@ This update method also only accept one `array` parameter, which contain index b
 
 <table>
   <tr>
-    <td>Index<td>
-    <td>Type<td>
-    <td>Description<td>
+    <td>Index</td>
+    <td>Type</td>
+    <td>Description</td>
   </tr>
   <tr>
-    <td><code>data</code><td>
-    <td><code>array</code><td>
-    <td>Most of the time you will use this index for the data<td>
+    <td><code>data</code></td>
+    <td><code>array</code></td>
+    <td>Most of the time you will use this index for the data</td>
   </tr>
   <tr>
-    <td><code>data_false</code><td>
-    <td><code>array</code><td>
-    <td>Use this parameter to prevent data form being escaped<td>
+    <td><code>data_false</code></td>
+    <td><code>array</code></td>
+    <td>Use this parameter to prevent data form being escaped</td>
   </tr>
   <tr>
-    <td><code>where</code><td>
-    <td><code>array</code><td>
-    <td>Most of the time you will use this index to filter the data<td>
+    <td><code>where</code></td>
+    <td><code>array</code></td>
+    <td>Most of the time you will use this index to filter the data</td>
   </tr>
   <tr>
-    <td><code>where_false</code><td>
-    <td><code>array</code><td>
-    <td>Use this filter to prevent data from being escaped<td>
+    <td><code>where_false</code></td>
+    <td><code>array</code></td>
+    <td>Use this filter to prevent data from being escaped</td>
   </tr>
   <tr>
-    <td><code>where_in</code><td>
-    <td><code>array</code><td>
-    <td>Generates a WHERE field IN<td>
+    <td><code>where_in</code></td>
+    <td><code>array</code></td>
+    <td>Generates a WHERE field IN</td>
   </tr>
   <tr>
     <td colspan="3">
       <b>PS: You can add more index variant if you want according to your need</b>
     </td>
-  </td>
+  </tr>
 </table>
 
 #### Example
@@ -474,30 +474,30 @@ This update method also only accept one `array` parameter, which contain index b
 
 <table>
   <tr>
-    <td>Index<td>
-    <td>Type<td>
-    <td>Description<td>
+    <td>Index</td>
+    <td>Type</td>
+    <td>Description</td>
   </tr>
   <tr>
-    <td><code>where</code><td>
-    <td><code>array</code><td>
-    <td>Most of the time you will use this index to filter the data<td>
+    <td><code>where</code></td>
+    <td><code>array</code></td>
+    <td>Most of the time you will use this index to filter the data</td>
   </tr>
   <tr>
-    <td><code>where_false</code><td>
-    <td><code>array</code><td>
-    <td>Use this filter to prevent data from being escaped<td>
+    <td><code>where_false</code></td>
+    <td><code>array</code></td>
+    <td>Use this filter to prevent data from being escaped</td>
   </tr>
   <tr>
-    <td><code>where_in</code><td>
-    <td><code>array</code><td>
-    <td>Generates a WHERE field IN<td>
+    <td><code>where_in</code></td>
+    <td><code>array</code></td>
+    <td>Generates a WHERE field IN</td>
   </tr>
   <tr>
     <td colspan="3">
       <b>PS: You can add more index variant if you want according to your need</b>
     </td>
-  </td>
+  </tr>
 </table>
 
 #### Example
