@@ -20,7 +20,7 @@
         foreach ($columns as $key => $column) {
           if($column['searchable'] === "true"){
             // $param['likes'][] = [ $column['data'], $search['value'] ];
-            $param['or_likes'][] = [
+            $param['or_like'][] = [
               'column' => $column['data'],
               'keyword' => $search['value'],
               'type' => 'both'
@@ -55,7 +55,7 @@
           $columnDef = $columnsDef[$key];
           switch ($columnDef['type']) {
             case 'string':
-              $param['likes'][] = [
+              $param['like'][] = [
                 'column' => $columnDef['value'],
 								'keyword' => $column['search']['value'],
 								'type' => 'both'
