@@ -396,6 +396,8 @@ if(!$query->status) {
 }
 ```
 
+----
+
 ### Update Data
 
 This update method also only accept one `array` parameter, which contain index below.
@@ -489,6 +491,8 @@ if(!$query->status) {
   // do something here if its true
 }
 ````
+
+----
 
 ### Delete Data
 
