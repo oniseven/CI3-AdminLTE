@@ -1139,7 +1139,7 @@ $configs = [
   'limit' => [
     10, // length
     20  // start / offset
-  ]
+  ],
   // or
   'limit' => [
     'length' => 10,
