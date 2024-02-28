@@ -980,7 +980,7 @@ $configs = [
   'select' => 'id, name, email',
 
   'distinct' => true, // or false - default false
-  'escape' => true, // or NULL - default false
+  'escape' => false, // or NULL - default false
 
   // joining with one table
   'join' => [
