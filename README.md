@@ -602,6 +602,129 @@ if(!$query->status) {
 }
 ````
 
+----
+
+### Get All Data
+
+This method is use to get all the data in the table without any filter and no LIMIT, with below parameter
+
+**Do not use it on the table with huge amount of data in it**
+
+<table>
+  <tr>
+    <td>Variable</td>
+    <td>Type</td>
+    <td>Default</td>
+    <td>Description</td>
+  </tr>
+  <tr>
+    <td><code>$columns</code></td>
+    <td><code>string | array</code></td>
+    <td><code>*</code></td>
+    <td>List column to show</td>
+  </tr>
+  <tr>
+    <td><code>$escape</code></td>
+    <td><code>boolean | NULL</code></td>
+    <td><code>NULL</code></td>
+    <td>Escape string</td>
+  </tr>
+</table>
+
+#### Example
+
+````php
+// load a model
+$this->load->model('users');
+
+// calling the method
+$query = $this->users->get_all();
+
+// this will be converted to
+/**
+ * $this->db->select(column, escape)
+ *          ->from(table)
+ *          ->get()
+ **/
+
+// check the query status
+if(!$query->status) {
+  // do something here if its false
+} else {
+  // do something here if its true
+}
+````
+
+----
+
+### Find By ID
+
+This method is use to get data by primary key id column, with below parameter
+
+<table>
+  <tr>
+    <td>Variable</td>
+    <td>Type</td>
+    <td>Default</td>
+    <td>Description</td>
+  </tr>
+  <tr>
+    <td><code>$value</code></td>
+    <td><code>integer | string</code> *</td>
+    <td></td>
+    <td>Well its literally the value of the ID of course</td>
+  </tr>
+  <tr>
+    <td><code>$column_name</code></td>
+    <td><code>string</code></td>
+    <td><code>id</code></td>
+    <td>Primary key id column name</td>
+  </tr>
+  <tr>
+    <td><code>$select</code></td>
+    <td><code>array|string</code></td>
+    <td><code>*</code></td>
+    <td>List of column to show</td>
+  </tr>
+  <tr>
+    <td><code>$escape</code></td>
+    <td><code>boolean | NULL</code></td>
+    <td><code>NULL</code></td>
+    <td>Escape String for select</td>
+  </tr>
+  <tr>
+    <td><code>$distinct</code></td>
+    <td><code>boolean</code></td>
+    <td><code>FALSE</code></td>
+    <td>Distinct the result, somehow I need this parameter.</td>
+  </tr>
+</table>
+
+#### Example
+
+````php
+// load a model
+$this->load->model('users');
+
+// calling the method
+$query = $this->users->find_by_id(13);
+
+// this will be converted to
+/**
+ * $this->db->select('*', NULL)
+ *          ->from('users')
+ *          ->where('id', 13)
+ *          ->get()
+ **/
+
+// check the query status
+if(!$query->status) {
+  // do something here if its false
+} else {
+  // do something here if its true
+}
+````
+
 # Resources
 
 -  Codeigniter <https://codeigniter.com/docs>
