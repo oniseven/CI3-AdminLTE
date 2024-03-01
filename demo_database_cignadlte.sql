@@ -31,7 +31,7 @@ CREATE TABLE `menus` (
   `is_last` tinyint(1) unsigned NOT NULL DEFAULT 1,
   `is_active` tinyint(1) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 /*Data for the table `menus` */
 
@@ -46,7 +46,29 @@ insert  into `menus`(`id`,`parent_id`,`position`,`name`,`slug`,`link`,`icon`,`is
 (8,6,'left','Level 2','level_2','#','far fa-circle',0,1),
 (9,8,'left','Level 3','level_3','#','fas fa-circle',1,1),
 (10,NULL,'top','Home','home','#','far fa-circle',1,1),
-(11,NULL,'top','Contact','contact','#','far fa-circle',1,1);
+(11,NULL,'top','Contact','contact','#','far fa-circle',1,1),
+(12,NULL,'left','Extra','extra','#','far fa-plus-square',0,1),
+(13,12,'left','Login','login','login','far fa-circle',1,1),
+(14,12,'left','Register','register','register','far fa-circle',1,1),
+(15,NULL,'left','CRUD','crud','crud','far fa-circle',1,1);
+
+/*Table structure for table `test_crud` */
+
+DROP TABLE IF EXISTS `test_crud`;
+
+CREATE TABLE `test_crud` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `about` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+/*Data for the table `test_crud` */
+
+insert  into `test_crud`(`id`,`name`,`about`,`created_at`) values 
+(1,'John Doe','Just human being','2024-03-01 11:09:35'),
+(4,'John Doe','Just human being','2024-03-01 11:20:54');
 
 /*Table structure for table `users` */
 
