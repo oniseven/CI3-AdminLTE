@@ -29,4 +29,4 @@
     }
   ?>
 </head>
-<body class="<?php echo $classes['body']; ?>">
+<body class="<?php echo $classes['body'] ?? ''; ?>">
