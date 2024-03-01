@@ -109,7 +109,6 @@ class MY_Model extends CI_Model {
     $table_name = $this->get_table_name(false);
 
     $query = $db->insert($table_name);
-    $query->status = $query ? true : false;
 
     return $query;
   }
@@ -178,8 +177,8 @@ class MY_Model extends CI_Model {
       }
     }
 
-    $query = $db->delete($this->table_name);
-    $query->status = $query ? true : false;
+    $table_name = $this->get_table_name(false);
+    $query = $db->delete($table_name);
 
     return $query;
   }
