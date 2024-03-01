@@ -107,7 +107,6 @@ class MY_Model extends CI_Model {
       $db->set($params['data_false'], '', false);
 
     $table_name = $this->get_table_name(false);
-
     $query = $db->insert($table_name);
 
     return $query;
