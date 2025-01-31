@@ -60,8 +60,9 @@ $autoload['packages'] = array();
 */
 $autoload['libraries'] = array(
   'database',
-  'response',
   'template',
+  'request',
+  'response',
   'datatables'
 );
 

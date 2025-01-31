@@ -27,7 +27,7 @@ const mainJs = function() {
         url:`${pageUrl}/datatable`,
         type: "POST",
         data: {
-          columnsDef: [
+          columnDefs: [
             { value: "id", type: "num" },
             { value: "fullname", type: "string" },
             { value: "username", type: "string" },

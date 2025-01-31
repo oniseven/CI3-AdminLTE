@@ -15,13 +15,19 @@ class Template
    * @var string        $page_title               Page title
    * @var array|string  $page_css                 Custom page CSS Style
    * @var array|string  $page_js                  Custom page javascript
-   * @var integer       $privilege_id             User privilege id
+   * @var object        $sessions                 Contain user login sessions
+   * @var integer       $privilege_id             User privilege id login
+   * @var integer       $user_id                  User id login
    * @var object        $setting                  App setting variable from App_setting library
    * @var object        $profile                  Company Profile value from App_setting library using get function with "profile" key
-   * @var object        $sessions                 Contain user login sessions
    * @var array         $css                      Plugin css
    * @var array         $js                       Plugin js
    * @var array         $classes                  Additional/Custom class for specific tag
+   * @var array         $allowed_tags_class       List of allowed tag that able to set custom class
+   * @var object        $page_detail              Page description and data
+   * @var boolean       $bypass_page_detail       Bypass page detail checker
+   * @var boolean       $sidebar_collapse         Minimize the sidebar
+   * 
    */
 
   var $CI;
@@ -33,14 +39,28 @@ class Template
   public $page_title = 'Default Title';
   public $page_css = [];
   public $page_js = [];
-  public $sessions, $privilege_id;
+  public $sessions, $privilege_id, $user_id;
   public $setting, $profile;
   public $css = [];
   public $js = [];
-  public $classes = [];
+  public $classes = ["body" => ""];
+  private $allowed_tags_class = ["body"];
+  public $page_detail = null;
+  private $bypass_page_detail = false;
+  public $sidebar_collapse = false;
+
+  private $menu_model = "menus";
   
   public function __construct() {
     $this->CI =& get_instance();
+
+    // you sessions, privilege_id, user_id, setting, profile
+    // $this->sessions = $this->CI->auth->get_user_data(); 
+    // $this->privilege_id = $this->CI->auth->get_user_data("privilege_id");
+    // $this->user_id = $this->CI->auth->get_user_data("id");
+
+    // $this->setting = $this->CI->app_setting->get();
+    // $this->profile = $this->setting->profile;
   }
 
   /**
@@ -50,7 +70,11 @@ class Template
    * 
    * @return object
    */
-  public function page_type($type) {
+  public function page_type(string $type) {
+    $types = ["default", "blank"];
+    if(!in_array($type, $types))
+      show_error("Tag <b>\"{$type}\"</b> its not on the allowed page type list.");
+
     $this->page_type = $type;
     return $this;
   }
@@ -182,7 +206,20 @@ class Template
    * @return object
    */
   public function tag_class($tag, $classes) {
+    if(!in_array($tag, $this->allowed_tags_class))
+      show_error("Tag <b>\"{$tag}\"</b> its not on the allowed list tags for adding class.");
+
     $this->classes[$tag] = $classes;
+    return $this;
+  }
+
+  /**
+   * Function to minimize the sidebar menu
+   * 
+   * @return object
+   */
+  public function sidebar_collapse(){
+    $this->sidebar_collapse = true;
     return $this;
   }
 
@@ -209,6 +246,7 @@ class Template
     $data['page_css'] = array_unique($this->page_css);
     $data['page_js'] = array_unique($this->page_js);
     $data['classes'] = $this->classes;
+    $data['sidebar_collapse'] = $this->sidebar_collapse ? "sidebar-collapse" : "";
     
     // load the page base on the page_type, default will be loading all the header, menus, sidebar, and footer.
     if($this->page_type === "blank"){
@@ -241,7 +279,7 @@ class Template
    * @return array
    */
   private function get_menu($parent_id = null, $position = 'left'){
-    $this->CI->load->model('menus');
+    $this->CI->load->model($this->menu_model);
     $column = ['id', 'parent_id', 'name', 'slug', 'link', 'icon', 'is_last'];
     $params = [
       'select' => $column,

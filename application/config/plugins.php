@@ -37,4 +37,21 @@ $plugins['datatables-colreorder'] = [
   ]
 ];
 
+$plugins['jstree'] = [
+  'css' => [
+    'assets/plugins/jstree/jstree.bundle.css'
+  ],
+  'js' => [
+    'assets/plugins/jstree/jstree.bundle.js'
+  ]
+];
+
+$plugins['validation'] = [
+  'css' => [],
+  'js' => [
+    'assets/plugins/jquery-validation/jquery.validate.min.js',
+    'assets/plugins/jquery-validation/additional-methods.min.js',
+  ]
+];
+
 $config['plugins'] = $plugins;
