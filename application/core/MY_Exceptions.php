@@ -14,15 +14,13 @@ class MY_Exceptions extends CI_Exceptions {
    */
   public function show_404($page = '', $log_error = TRUE)
   {
-    $CI =& get_instance();
-
     if(is_cli()){
       $heading = 'Not Found';
 			$message = 'The controller/method pair you requested was not found.';
     } else {
       $heading = '404 Page Not Found';
 			$message = 'The page you requested was not found.';
-      
+      $CI = &get_instance();
       $CI->template
         ->page_type('blank')
         ->page_title($heading)
@@ -40,5 +38,4 @@ class MY_Exceptions extends CI_Exceptions {
 
     exit(4);
   }
-
 }

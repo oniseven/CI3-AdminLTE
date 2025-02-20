@@ -31,7 +31,12 @@ const mainJs = (() => {
 					],
 				},
 				error: function (xhr, error, code) {
-					checkAjaxCustomError(xhr, error)
+					Swal.fire({
+            title: 'Terjadi Kesalahan',
+            text: 'Terjadi kesalahan saat memproses request',
+            icon: "error",
+            confirmButtonText: "OK",
+          });
 				},
 			},
       columns: [
@@ -44,6 +49,7 @@ const mainJs = (() => {
       order: [[1, "asc"]],
       columnDefs: [
 				{ className: "text-center", targets: [0, 2] },
+        { targets: [0], orderable: false, searchable: false },
 				{
 					targets: [2],
 					orderable: false,
@@ -75,6 +81,24 @@ const mainJs = (() => {
 			],
     });
 
+    DTUtils.drawNumber(table);
+
+    table.on("click", "tbody div.edit-data", function () {
+			var data = table.row($(this).parents("tr")).data();
+			mainJs.editData(data);
+		});
+
+    table.on("click", "tbody div.delete-data", function () {
+			var data = table.row($(this).parents("tr")).data();
+			mainJs.deleteData(data);
+		});
+
+    table.on("change", "tbody input.change_is_active", function (e) {
+			var data = table.row($(this).parents("tr")).data();
+			var checked = this.checked;
+			mainJs.updateStatus(data, checked);
+		});
+
     return table;
   }
 
@@ -102,11 +126,27 @@ const mainJs = (() => {
         $(element).removeClass('is-invalid');
       },
       submitHandler: function(form) {
-        Swal.fire("Asdfasf");
-        // some other code
-        // maybe disabling submit button
-        // then:
-        // $(form).submit();
+        $.cajax({
+          url: `${pageUrl}/save_data`,
+          method: "POST",
+          data: mainForm.serialize(),
+          dataType: 'json',
+          success: (response) => {
+            const { metadata } = response;
+            Swal.fire({
+              title: metadata.status ? "Berhasil" : "Gagal",
+              html: metadata.message,
+              icon: metadata.status ? "success" : "warning",
+            }).then((result) => {
+              if (result.isConfirmed && metadata.status) {
+                mainJs.resetForm();
+              }
+            });
+          },
+        }).always((xhr) => {
+          if (xhr.status !== 401 && xhr.status !== 403)
+            DTUtils.refreshData(grid);
+        });
       }
     })
   }
@@ -115,27 +155,106 @@ const mainJs = (() => {
     $('a[data-bs-toggle="tab"][href="#group-access"]').on(
 			"shown.bs.tab",
 			function () {
-        console.log('asdfasdf');
 				DTUtils.refreshData(grid);
 			}
 		);
   }
+
+	const handleButtons = function() {
+		$('#btn-reset').on('click', function(e){
+			e.preventDefault();
+
+			mainJs.resetForm();
+		})
+	}
 
   return {
     init: function() {
       grid = handleDataTable();
       handleTabs();
       handleForm();
+			handleButtons();
     },
-    edit: function() {
-      
+    resetForm: function() {
+      $("#priv-id").val("");
+			mainForm.trigger("reset");
     },
-    delete: function() {
-
+    editData: function(data) {
+      const { id, name, is_active } = data;
+			$("#priv-id").val(+id);
+			$("#name").val(name);
+			$("#status").prop("checked", +is_active);
+    },
+    deleteData: function(data) {
+      Swal.fire({
+				title: `Yakin Ingin Menghapus Data ${data.name}?`,
+				text: "Data tidak bisa dikembalikan apabila telah dihapus!",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#3085d6",
+				cancelButtonColor: "#d33",
+				confirmButtonText: "Yes",
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.cajax({
+						url: `${pageUrl}/delete_data`,
+						method: "POST",
+						data: {
+							id: data.id,
+						},
+						dataType: 'json',
+						success: (response) => {
+							const { metadata } = response;
+							Swal.fire({
+								title: metadata.status ? "Berhasil" : "Gagal",
+								html: metadata.message,
+								icon: metadata.status ? "success" : "warning",
+							});
+						},
+					}).always((xhr) => {
+						if (xhr.status !== 401 && xhr.status !== 403)
+							DTUtils.refreshData(grid);
+					});
+				}
+			});
+    },
+    updateStatus: function(data, checked) {
+			const statusText = checked ? 'Aktif' : 'Tidak Aktif';
+			Swal.fire({
+				title: `Yakin Ingin Mengubah Status Data menjadi ${statusText}?`,
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#3085d6",
+				cancelButtonColor: "#d33",
+				confirmButtonText: "Yes",
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.cajax({
+						url: `${pageUrl}/update_status`,
+						method: "POST",
+						data: {
+							id: data.id,
+							checked: checked ? 1 : 0
+						},
+						dataType: 'json',
+						success: (response) => {
+							const { metadata } = response;
+							Swal.fire({
+								title: metadata.status ? "Berhasil" : "Gagal",
+								html: metadata.message,
+								icon: metadata.status ? "success" : "warning",
+							});
+						},
+					}).always((xhr) => {
+						if (xhr.status !== 401 && xhr.status !== 403)
+							DTUtils.refreshData(grid);
+					});
+				}
+			});
     }
   }
 })();
 
 Cignadlte.onDOMContentLoaded(() => {
   mainJs.init();
-})
+});

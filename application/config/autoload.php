@@ -63,7 +63,8 @@ $autoload['libraries'] = array(
   'template',
   'request',
   'response',
-  'datatables'
+  'datatables',
+  'services/generalservice',
 );
 
 /*
@@ -95,7 +96,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url', 'array');
+$autoload['helper'] = array('url', 'array', 'opt_validation');
 
 /*
 | -------------------------------------------------------------------

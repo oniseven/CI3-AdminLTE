@@ -24,11 +24,11 @@ class Response {
   /**
    * Set the HTTP status code for the response.
    * 
-   * @param integer $status_code The HTTP status code. Default is 200.
+   * @param int $status_code The HTTP status code. Default is 200.
    * 
    * @return object Returns the current instance for method chaining.
    */
-  public function status(integer $status_code) {
+  public function status(int $status_code) {
     $this->http_code = $status_code;
 
     return $this;
@@ -42,7 +42,7 @@ class Response {
    * 
    * @return object Returns the current instance for method chaining.
    */
-  public function metadata(bool $status = true, string $message = "Sukses") {
+  public function metadata(bool $status = true, ?string $message = "Sukses") {
     $this->metadata = [
       "status" => $status,
       "message" => $message

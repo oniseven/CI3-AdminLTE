@@ -99,7 +99,7 @@ class MY_Model extends CI_Model {
     if(!array_key_exists('data', $params) && !array_key_exists('data_false'))
       throw new Exception("There are no data to create!", 1);
 
-    if(!empty($this->allowed_columns) && !$this->is_column_allowed($params))
+    if(!empty($this->allowed_columns) && !$this->is_allowed_column($params))
       throw new Exception("Data contain not allowed columns", 1);
 
     $db = $this->db_init();
