@@ -1,11 +1,12 @@
 let grid;
 
-const tableGridID = "#main-grid";
+const tableGridID = "#group-grid";
 const tableGrid = $(tableGridID);
-const mainForm = $('#main-form');
-const mainModal = $('#main-modal');
+const groupForm = $('#group-form');
+const groupModal = $('#group-modal');
+const groupMenu = $("#menu-tree");
 
-const mainJs = (() => {
+const groupJs = (() => {
   const handleDataTable = function() {
     const table = tableGrid.DataTable({
       dom: `<'row'<'col-sm-6'l><'col-sm-6'p>>
@@ -85,25 +86,30 @@ const mainJs = (() => {
 
     table.on("click", "tbody div.edit-data", function () {
 			var data = table.row($(this).parents("tr")).data();
-			mainJs.editData(data);
+			groupJs.editData(data);
 		});
 
     table.on("click", "tbody div.delete-data", function () {
 			var data = table.row($(this).parents("tr")).data();
-			mainJs.deleteData(data);
+			groupJs.deleteData(data);
 		});
 
     table.on("change", "tbody input.change_is_active", function (e) {
 			var data = table.row($(this).parents("tr")).data();
 			var checked = this.checked;
-			mainJs.updateStatus(data, checked);
+			groupJs.updateStatus(data, checked);
+		});
+
+		table.on("click", "tbody div.edit-menu", function () {
+			var data = table.row($(this).parents("tr")).data();
+			groupJs.editMenus(data);
 		});
 
     return table;
   }
 
   const handleForm = function() {
-    mainForm.validate({
+    groupForm.validate({
       rules: {
         name: {
           required: true,
@@ -129,7 +135,7 @@ const mainJs = (() => {
         $.cajax({
           url: `${pageUrl}/save_data`,
           method: "POST",
-          data: mainForm.serialize(),
+          data: groupForm.serialize(),
           dataType: 'json',
           success: (response) => {
             const { metadata } = response;
@@ -139,7 +145,7 @@ const mainJs = (() => {
               icon: metadata.status ? "success" : "warning",
             }).then((result) => {
               if (result.isConfirmed && metadata.status) {
-                mainJs.resetForm();
+                groupJs.resetForm();
               }
             });
           },
@@ -164,8 +170,90 @@ const mainJs = (() => {
 		$('#btn-reset').on('click', function(e){
 			e.preventDefault();
 
-			mainJs.resetForm();
-		})
+			groupJs.resetForm();
+		});
+
+		$("#menus-save-button").on("click", function (e) {
+			e.preventDefault();
+			const group_id = $("#priv-id").val();
+			if (!group_id)
+				return Swal.fire("", "Pilih Salah Satu Group Akses Terlebih Dahulu");
+
+			const selected_data = $("#menu-tree").jstree("get_selected", true);
+
+			let data = [];
+			selected_data.forEach(selected => {
+				const exist = data.find(s => s.menu_id == selected.parent);
+				if(selected.parent != '#' && !exist){
+					data.push({
+						menu_id: selected.parent,
+						privilege_id: group_id,
+						is_selected: 0,
+					})
+				}
+
+				const child = selected.children;
+				const is_selected = child.length ? 0 : 1;
+				const existChils = data.find(s => s.menu_id == selected.id)
+				if(!existChils){
+					data.push({
+						menu_id: selected.id,
+						privilege_id: group_id,
+						is_selected,
+					})
+				}
+			});
+
+			const menu_id = data.map((item) => item.menu_id);
+
+			$.cajax({
+				url: `${pageUrl}/save_menu`,
+				method: "POST",
+				data: { data, group_id, menu_id },
+				dataType: 'json',
+				success: (response) => {
+					const { metadata } = response;
+					Swal.fire({
+						title: metadata.status ? "Berhasil" : "Gagal",
+						html: metadata.message,
+						icon: metadata.status ? "success" : "warning",
+					});
+
+					if (metadata.status) groupModal.modal("hide");
+				},
+			});
+		});
+	}
+
+	const handleTree = () => {
+		groupMenu.jstree({
+			plugins: ["checkbox"],
+			core: {
+				data: {
+					url: `${pageUrl}/menutree`,
+					method: "POST",
+					data: function (node) {
+						const group_id = $("#priv-id").val();
+						return { id: node.id, group_id };
+					},
+				},
+			},
+		});
+
+		groupMenu.on("loaded.jstree", function () {
+			groupMenu.jstree("open_all");
+		});
+	};
+
+	const handleModal = () => {
+		groupModal.on("hide.bs.modal", () => {
+			groupJs.resetForm();
+			groupMenu.jstree("destroy").empty();
+		});
+
+		groupModal.on("shown.bs.modal", () => {
+			handleTree();
+		});
 	}
 
   return {
@@ -174,10 +262,11 @@ const mainJs = (() => {
       handleTabs();
       handleForm();
 			handleButtons();
+			handleModal();
     },
     resetForm: function() {
       $("#priv-id").val("");
-			mainForm.trigger("reset");
+			groupForm.trigger("reset");
     },
     editData: function(data) {
       const { id, name, is_active } = data;
@@ -251,10 +340,15 @@ const mainJs = (() => {
 					});
 				}
 			});
-    }
+    },
+		editMenus: function(data) {
+			const { id } = data;
+			$("#priv-id").val(id);
+			groupModal.modal('show');
+		}
   }
 })();
 
 Cignadlte.onDOMContentLoaded(() => {
-  mainJs.init();
+  groupJs.init();
 });

@@ -15,7 +15,7 @@ class PrivilegeService {
   public function input_validation($id = null): array {
     $this->ci->load->library('form_validation');
     // is_unique_exclude_id is listed in helpers/opt_validation_helper.php
-    $is_unique = empty($id) ? "|is_unique[privilege.name]" : "|is_unique_exclude_id[{$id}.privilege.name]";
+    $is_unique = empty($id) ? "|is_unique[privileges.name]" : "|is_unique_exclude_id[{$id}.privilege.name]";
 
     $config = array(
       array(
@@ -114,13 +114,13 @@ class PrivilegeService {
     $status = $query ? true : false;
     $textStatus = $query ? 'berhasil' : 'gagal';
 
-    return [$status, "Data {$berhasil} di hapus!"];
+    return [$status, "Data {$textStatus} di hapus!"];
   }
 
   public function save_menu(array $params)
   {
-    $this->ci->load->model('menuprivileges');
-    $db = $this->ci->menuprivileges->db_init();
+    $this->ci->load->model('menuprivilege');
+    $db = $this->ci->menuprivilege->db_init();
 
     $status = false;
     $message = 'Akses menu gagal disimpan';
@@ -132,12 +132,12 @@ class PrivilegeService {
     ) = $params;
 
     $db->trans_start();
-    $query = $this->ci->menuprivileges->delete([
+    $query = $this->ci->menuprivilege->delete([
       "where" => [ "privilege_id" => $group_id ]
     ]);
     
     if(!empty($data)){
-      $query = $this->ci->menuprivileges->insertbatch($data);
+      $query = $this->ci->menuprivilege->insertbatch($data);
     }
 
     $db->trans_complete();

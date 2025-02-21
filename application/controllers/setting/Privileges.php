@@ -11,11 +11,57 @@ class Privileges extends CI_Controller {
 	}
 
 	public function index() {
+		$data = [
+			"group_section" => $this->load->view('setting/privileges/group_access', '',true),
+		];
+
 		$this->template
 			->page_title('Setting Hak Akses')
       ->plugins(['datatables', 'jstree', 'validation'])
 			->page_js('assets/dist/js/pages/setting/privileges.js')
-      ->load('setting/privileges');
+      ->load('setting/privileges/main', $data);
+	}
+
+	public function menutree() {
+		if(!$this->request->is_ajax()) 
+			return show_404();
+
+		$id = $this->input->post('id', TRUE);
+		$id = $id === '#' ? NULL : $id;
+		$group_id = (int) $this->input->post('group_id', TRUE);
+
+		$this->load->model('menus');
+		$configs = [
+			'select' => 'm.*, IFNULL(mp.is_selected, 0) AS selected',
+			'escape' => false,
+			'where' => ['parent_id' => $id, 'is_active' => 1],
+			'joins' => [
+				[
+					'table' => 'menu_privileges as mp',
+					'on' => "mp.menu_id = m.id AND mp.privilege_id = {$group_id}",
+					'type' => 'left'
+				]
+			],
+			'order_by' => "m.parent_id ASC"
+		];
+		$query = $this->menus->find($configs);
+		$menus = $query->status ? $query->result() : [];
+
+		$data = [];
+		foreach ($menus as $key => $menu) {
+			$icon = $menu->is_last ? 'fa-file text-primary' : 'fa-folder text-warning';
+			$data[$key] = [
+				"id" => $menu->id,
+				"text" => $menu->name,
+				'icon' => "fa {$icon} icon-md",
+				"state" => [
+					"selected" => (int) $menu->selected ? true : false,
+				],
+				"children" => !(int) $menu->is_last ? true : false
+			];
+		}
+
+		return $this->response->json($data);
 	}
 
 	public function save_data() {
@@ -78,8 +124,7 @@ class Privileges extends CI_Controller {
 			->json();
 	}
 
-	public function update_status()
-	{
+	public function update_status() {
 		// check if its ajax request
 		if(!$this->request->is_ajax()) {
 			return show_404();
@@ -113,13 +158,20 @@ class Privileges extends CI_Controller {
 			return show_404();
 		}
 
-		$params = $this->request->get_json(true);
+		$data = $this->input->post('data');
+		$group_id = $this->input->post('group_id');
+		$menu_id = $this->input->post('menu_id');
 
-		$this->load->model('lisrs/menuprivileges');
+		$params = [
+			"data" => $data,
+			"group_id" => $group_id,
+			"menu_id" => $menu_id
+		];
+
 		list(
 			$status,
 			$error
-		) = $this->privilegesservice->save_menu($params);
+		) = $this->privilegeservice->save_menu($params);
 
 		return $this->response
 			->metadata($status, $status ? 'Menu Berhasil Disimpan' : $error)
