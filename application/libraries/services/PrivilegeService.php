@@ -117,8 +117,7 @@ class PrivilegeService {
     return [$status, "Data {$textStatus} di hapus!"];
   }
 
-  public function save_menu(array $params)
-  {
+  public function save_menu(array $params){
     $this->ci->load->model('menuprivilege');
     $db = $this->ci->menuprivilege->db_init();
 
@@ -165,5 +164,20 @@ class PrivilegeService {
     $message = $query ? "Data berhasil di {$textStatus}" : "Data gagal di {$textStatus}!";
 
     return [$status, $message];
+  }
+
+  public function list(string $keyword = null) {
+    $params = [
+      'select' => ['id', 'name as text'],
+      'where' => [
+        "is_active" => 1
+      ]
+    ];
+    if(!empty($keyword))
+      $params['like'] = [['name', $keyword]];
+
+    $query = $this->ci->privilege->find($params);
+
+    return $query->status ? $query->result() : [];
   }
 }

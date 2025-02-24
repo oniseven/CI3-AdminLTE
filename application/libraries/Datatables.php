@@ -42,8 +42,9 @@
      * $this->datatables->select(["id", "name"]);
      */
     public function select($columns, $escape = FALSE) {
-      if(empty($columns))
+      if(empty($columns)){
         show_error('Datatables parameter Select tidak boleh kosong. cth<br/><code>$this->datatables->select(["id", "name"])</code>');
+      }
 
       $this->select = $columns;
       $this->escape = $escape;
@@ -220,7 +221,7 @@
       }
 
       // get total data without filtering
-      $recordsTotal = 0; // $this->CI->model_dt->find(['count_all' => true], $last_query);
+      $recordsTotal = $this->CI->model_dt->find(['count_all' => true]);
 
       // search
       // get the search param

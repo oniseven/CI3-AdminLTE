@@ -158,7 +158,7 @@ const groupJs = (() => {
   }
 
   const handleTabs = function() {
-    $('a[data-bs-toggle="tab"][href="#group-access"]').on(
+		$('a#group-access-tab').on(
 			"shown.bs.tab",
 			function () {
 				DTUtils.refreshData(grid);

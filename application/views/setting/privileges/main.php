@@ -15,7 +15,7 @@
         <?=$group_section?>
       </div>
       <div id="pengguna" class="tab-pane fade" role="tabpanel" aria-labelledby="pengguna-tab">
-        pengguna
+        <?=$user_section?>
       </div>
     </div>
   </div>

@@ -54,4 +54,14 @@ $plugins['validation'] = [
   ]
 ];
 
+$plugins['select2'] = [
+  'css' => [
+    'assets/plugins/select2/css/select2.min.css',
+    'assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css',
+  ],
+  'js' => [
+    'assets/plugins/select2/js/select2.min.js',
+  ]
+];
+
 $config['plugins'] = $plugins;

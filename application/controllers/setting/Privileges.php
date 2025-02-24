@@ -13,12 +13,21 @@ class Privileges extends CI_Controller {
 	public function index() {
 		$data = [
 			"group_section" => $this->load->view('setting/privileges/group_access', '',true),
+			"user_section" => $this->load->view('setting/privileges/user', '',true),
 		];
 
 		$this->template
 			->page_title('Setting Hak Akses')
-      ->plugins(['datatables', 'jstree', 'validation'])
-			->page_js('assets/dist/js/pages/setting/privileges.js')
+      ->plugins([
+				'datatables', 
+				'jstree', 
+				'select2', 
+				'validation'
+			])
+			->page_js([
+				'assets/dist/js/pages/setting/privileges.js',
+				'assets/dist/js/pages/setting/user.js'
+			])
       ->load('setting/privileges/main', $data);
 	}
 
@@ -176,6 +185,19 @@ class Privileges extends CI_Controller {
 		return $this->response
 			->metadata($status, $status ? 'Menu Berhasil Disimpan' : $error)
 			->json();
+	}
+
+	public function list() {
+		if(!$this->request->is_ajax()){
+			return show_404();
+		}
+
+		$keyword = $this->input->get('q', FALSE);
+		$list = $this->privilegeservice->list($keyword);
+
+		return $this->response
+			->metadata()
+			->json($list);
 	}
 
 	public function datatable() {
