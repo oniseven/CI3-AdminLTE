@@ -11,10 +11,11 @@ class User extends CI_Controller {
 	}
 
   public function index() {
-    if($this->request->is_ajax())
-      return $this->response->not_found();
+    $this->response->redirect('setting/privileges');
+  }
 
-    return redirect('setting/privileges');
+  public function save() {
+    
   }
 
   public function datatable() {

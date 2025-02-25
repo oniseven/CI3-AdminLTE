@@ -109,4 +109,19 @@ class Response {
     else
       show_404();
   }
+
+
+  /**
+   * Handle redirect base on request type
+   * 
+   * if request is in ajax then return a json data
+   * else redirect to the route
+   */
+  public function redirect(string $route) {
+    if($this->CI->input->is_ajax_request()){
+      return $this->not_found(true);
+    }
+
+    return redirect($route);
+  }
 }
