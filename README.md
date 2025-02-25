@@ -9,14 +9,14 @@
   * [Load The Template](#details)
   * [Set Page Type](#set-page-type)
   * [Set Page Title](#set-page-title)
-  * [Use Plugins](#use-plugins)
-  * [Set Custom Class](#set-custom-class)
   * [Add Custom Page CSS](#add-custom-page-css)
   * [Add Custom Page JS](#add-custom-page-js)
   * [Hide Toolbar Content](#hide-toolbar-content)
   * [Hide Breadcrums](#hide-breadcrums)
   * [Hide Footer](#hide-footer)
   * [Hides a couple things](#hides-a-couple-things)
+  * [Use Plugins](#use-plugins)
+  * [Set Custom Class](#set-custom-class)
   * [Examples](#examples)
 * [Model Usage](#core-my_model-usage)
   * [Details](#details-1)
@@ -126,32 +126,6 @@ $this->template->page_title("Welcome Page");
 
 ----
 
-### Use Plugins
-
-Update your list of 3rd parties plugins that you use for your app in `application/configs/plugins.php`
-
-```php
-$this->template->plugins("datatables"); 
-```
-
-You could also set the parameter as an array
-
-```php
-$this->template->plugins(["datatables"]);
-```
-
-----
-
-### Set Custom Class
-
-This methode is use if you want to add a custom or additional class to some specific tags. Access the tag classes data in view by calling `$classes` variable.
-
-```php
-$this->template->tag_class("body", "hold-transition login-page");
-```
-
-----
-
 ### Add Custom Page CSS
 
 ```php
@@ -223,6 +197,32 @@ $this->template->hides([
   'breadcrums',
   'footer'
 ]);
+```
+
+----
+
+### Use Plugins
+
+Update your list of 3rd parties javascript/jquery plugins that you use for your app in `application/configs/plugins.php`
+
+```php
+$this->template->plugins("datatables"); 
+```
+
+You could also set the parameter as an array
+
+```php
+$this->template->plugins(["datatables"]);
+```
+
+----
+
+### Set Custom Class
+
+This methode is use if you want to add a custom or additional class to some specific tags. Access the tag classes data in view by calling `$classes` variable.
+
+```php
+$this->template->tag_class("body", "hold-transition login-page");
 ```
 
 ----
@@ -301,7 +301,7 @@ Honestly I hate to repeat my self to type the same function again and again acro
     <td>We do know that most of table has their own primary id, and usually the column name is <code>id</code>, but if somehow you decided to name the column differently like <code>not_id</code> maybe, then you better set this to that name</td>
   </tr>
   <tr>
-    <td><code>$allow_columns</code></td>
+    <td><code>$allowed_columns</code></td>
     <td><i>NULL</i></td>
     <td>List of allowed column for the table, make sure its in array, once again it must be an array</td>
   </tr>
@@ -560,7 +560,12 @@ This update method also only accept one `array` parameter, which contain index b
   <tr>
     <td><code>where_in</code></td>
     <td><code>array</code></td>
-    <td>Generates a WHERE field IN</td>
+    <td>Generates a WHERE IN</td>
+  </tr>
+  <tr>
+    <td><code>where_not_in</code></td>
+    <td><code>array</code></td>
+    <td>Generates a WHERE NOT IN</td>
   </tr>
   <tr>
     <td colspan="3">
