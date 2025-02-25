@@ -15,7 +15,30 @@ class User extends CI_Controller {
   }
 
   public function save() {
-    
+    // check if its ajax request
+		if(!$this->request->is_ajax()){
+			return show_404();
+		}
+
+    // validate user request
+    list(
+      $valid,
+      $err_message
+    ) = $this->userservice->input_validation();
+    if(!$valid) {
+			return $this->response
+				->metadata(false, $err_message)
+				->json();	
+		}
+
+    list(
+      $status,
+      $message
+    ) = $this->userservice->save();
+
+    return $this->response
+      ->metadata($status, $message)
+      ->json();
   }
 
   public function datatable() {
