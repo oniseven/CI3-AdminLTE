@@ -6,6 +6,7 @@
         <th class="text-center" style="width: 200px;" data-id="fullname">Nama</th>
         <th class="text-center" style="width: 150px;" data-id="username">Username</th>
         <th class="text-center" style="width: 200px;" data-id="email">Email</th>
+        <th class="text-center" style="width: 200px;" data-id="privilege">Privilege</th>
         <th class="text-center" style="width: 100px;" data-id="is_active">Status</th>
         <th class="text-center" style="width: 100px;" data-id="actions">Action</th>
       </tr>
@@ -47,7 +48,7 @@
           <div class="form-group">
             <label class="control-label">Status</label>
             <div class="custom-control custom-switch">
-              <input type="checkbox" name="is_active" id="status" value="1" class="custom-control-input" checked >
+              <input type="checkbox" name="is_active" id="status_user" value="1" class="custom-control-input" checked >
               <label class="custom-control-label" for="status">Aktif</label>
             </div>
           </div>

@@ -24,11 +24,12 @@ const userJs = (() => {
 				type: "POST",
 				data: {
 					columnDefs: [
-						{ value: "id", type: "num" },
+						{ value: "u.id", type: "num" },
 						{ value: "fullname", type: "string" },
 						{ value: "username", type: "string" },
 						{ value: "email", type: "string" },
-						{ value: "is_active", type: "num" },
+						{ value: "p.name", type: "string" },
+						{ value: "u.is_active", type: "num" },
 					],
 				},
 				error: function (xhr, error, code) {
@@ -45,6 +46,7 @@ const userJs = (() => {
 				{ data: "fullname" },
 				{ data: "username" },
 				{ data: "email" },
+				{ data: "privilege" },
 				{ data: "is_active" },
 				{ data: "actions", responsivePriority: -1 },
 			],
@@ -56,9 +58,9 @@ const userJs = (() => {
           orderable: false,
 					searchable: false,
         },
-        { className: "text-center", targets: [0, 2, 3, 4, 5] },
+        { className: "text-center", targets: [0, 2, 3, 4, 5, 6] },
         {
-					targets: [4],
+					targets: [5],
 					className: "text-center",
 					render: (data, type, full, meta) => {
 						const is_checked = +data;
@@ -97,6 +99,7 @@ const userJs = (() => {
 							case "fullname":
 							case "username":
 							case "email":
+							case "privilege":
                 input = $(
 									`<input type="text" class="form-control form-control-sm form-filter filter-input me-5" data-col-index="${column.index()}"/>`
 								);
@@ -149,6 +152,22 @@ const userJs = (() => {
       </button>`);
 
     DTUtils.drawNumber(table);
+
+    table.on("click", "tbody div.edit-data", function () {
+			var data = table.row($(this).parents("tr")).data();
+			userJs.editData(data);
+		});
+
+    table.on("click", "tbody div.delete-data", function () {
+			var data = table.row($(this).parents("tr")).data();
+			userJs.deleteData(data);
+		});
+
+    table.on("change", "tbody input.change_is_active", function (e) {
+			var data = table.row($(this).parents("tr")).data();
+			var checked = this.checked;
+			userJs.updateStatus(data, checked);
+		});
 
     return table;
   }
@@ -267,6 +286,27 @@ const userJs = (() => {
 			userForm.trigger("reset");
       $("#hakakses").val(null).trigger("change");
     },
+    editData: function(data) {
+      userModal.modal("show");
+
+      const {
+        id, 
+        fullname,
+        username,
+        email,
+        privilege_id,
+        privilege,
+        is_active
+      } = data;
+
+      $("#user-id").val(+id);
+			$("#fullname").val(fullname);
+			$("#username").val(username);
+			$("#email").val(email);
+			$("#password").val("");
+      Cignadlte.setManualSelect2('#hakakses', +privilege_id, privilege);
+      $("#status_user").prop("checked", +is_active);
+    }
   }
 })()
 

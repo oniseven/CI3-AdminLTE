@@ -48,15 +48,31 @@ class User extends CI_Controller {
 		}
 
 		$select = [
-			'id', 
+			'u.id', 
 			'fullname', 
 			'username',
 			'email',
-			'is_active',
+      'p.name as privilege',
+			'u.is_active',
+      'p.id as privilege_id'
 		];
+
+    $joins = [
+      [
+        'user_privileges as up',
+        'up.user_id = u.id',
+        'inner'
+      ],
+      [
+        'privileges as p',
+        'p.id = up.privilege_id',
+        'inner'
+      ]
+    ];
 
 		$data = $this->datatables
 			->select($select)
+      ->joins($joins)
 			->search_type("column")
 			->load($this->page_model);
 

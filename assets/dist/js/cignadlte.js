@@ -16,7 +16,17 @@ const Cignadlte = function() {
 				}
 			}, 1000)
     },
-    onDOMContentLoaded:function(e){"loading"===document.readyState?document.addEventListener("DOMContentLoaded",e):e()}
+    onDOMContentLoaded:function(e){"loading"===document.readyState?document.addEventListener("DOMContentLoaded",e):e()},
+		setManualSelect2: (id_select2, id, text) => {
+			var option = new Option(text, id, true, true);
+			$(id_select2).append(option).trigger('change');
+      $(id_select2).trigger({
+        type: 'select2:select',
+        params: {
+          data: { id, text }
+        }
+      });
+		},
   }
 }()
 
