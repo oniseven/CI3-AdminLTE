@@ -41,6 +41,35 @@ class User extends CI_Controller {
       ->json();
   }
 
+  public function delete() {
+    // check if its ajax request
+		if(!$this->request->is_ajax()){
+			return show_404();
+		}
+
+    $id = $this->input->post('id', FALSE);
+
+    // input validation
+		list(
+			$valid,
+			$err_message
+		) = $this->generalservice->input_id_validation();
+		if(!$valid) {
+			return $this->response
+				->metadata(false, $err_message)
+				->json();
+		}
+
+    list(
+			$status,
+			$message
+		) = $this->userservice->delete((int) $id);
+
+		return $this->response
+			->metadata($status, $message)
+			->json();
+  }
+
   public function datatable() {
     // check if its ajax request
 		if(!$this->request->is_ajax()){

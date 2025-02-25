@@ -10,9 +10,10 @@ class UserService {
 
     // Load necessary models/library/helper
     $this->ci->load->model('users');
+    $this->ci->load->model('userprivilege');
   }
 
-  public function input_validation($id = null): array {
+  public function input_validation(): array {
     $this->ci->load->library('form_validation');
 
     $id = $this->ci->input->post('id', TRUE);
@@ -94,9 +95,6 @@ class UserService {
   }
 
   public function save() {
-    // load model user privilege
-    $this->ci->load->model('userprivilege');
-
     $status = false;
 		$message = "Data gagal di proses!";
 		$error = null;
@@ -153,5 +151,24 @@ class UserService {
     }
 
     return [$status, $message, $error];
+  }
+
+  public function delete(int $id) {
+    // delete existing privilege of the user
+    $this->ci->userprivilege->delete([
+      'where' => [
+        "user_id" => $id
+      ]
+    ]);
+
+    // delete user
+    $query = $this->ci->users->delete([
+      'where' => [ 'id' => $id ]
+    ]);
+
+    $status = $query ? true : false;
+    $textStatus = $query ? 'berhasil' : 'gagal';
+
+    return [$status, "Data {$textStatus} di hapus!"];
   }
 }

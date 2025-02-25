@@ -306,6 +306,39 @@ const userJs = (() => {
 			$("#password").val("");
       Cignadlte.setManualSelect2('#hakakses', +privilege_id, privilege);
       $("#status_user").prop("checked", +is_active);
+    },
+    deleteData(data){
+      Swal.fire({
+				title: `Yakin Ingin Menghapus Data ${data.fullname}?`,
+				text: "Data tidak bisa dikembalikan apabila telah dihapus!",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#3085d6",
+				cancelButtonColor: "#d33",
+				confirmButtonText: "Yes",
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.cajax({
+						url: `${pageUrl}/../user/delete`,
+						method: "POST",
+						data: {
+							id: data.id,
+						},
+						dataType: 'json',
+						success: (response) => {
+							const { metadata } = response;
+							Swal.fire({
+								title: metadata.status ? "Berhasil" : "Gagal",
+								html: metadata.message,
+								icon: metadata.status ? "success" : "warning",
+							});
+						},
+					}).always((xhr) => {
+						if (xhr.status !== 401 && xhr.status !== 403)
+							DTUtils.refreshData(gridUser);
+					});
+				}
+			});
     }
   }
 })()
