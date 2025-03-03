@@ -63,7 +63,7 @@ class Migration_Create_menus_table extends CI_Migration {
 
     // insert dummy menu, it would be nice if there is a seeder
     $this->db->query("insert  into `menus`(`id`,`parent_id`,`position`,`name`,`slug`,`link`,`icon`,`is_last`,`is_active`) values 
-        (1,NULL,'left','Starter Page','/','/','fas fa-tachometer-alt',1,1),
+        (1,NULL,'left','Starter Page','starter','starter','fas fa-tachometer-alt',1,1),
         (2,NULL,'left','Tables','table','#','fas fa-table',0,1),
         (3,2,'left','Simple Table','simple_table','tables/simple','far fa-circle',1,1),
         (4,2,'left','Datatables','dtables','tables/dtables','far fa-circle',1,1),
