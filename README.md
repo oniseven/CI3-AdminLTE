@@ -130,11 +130,13 @@ $this->template->page_title("Welcome Page");
 
 ### Add Custom Page CSS
 
+if you have a specific custom css for a page, you can load it by using this method
+
 ```php
 $this->template->page_css("assets/dist/css/pages/demo.css");
 ```
 
-You could also set the parameter as an array if you have multiple custom js file for one page
+You could also set the parameter as an array if you have multiple custom css file for one page
 
 ```php
 $this->template->page_css([
@@ -146,6 +148,8 @@ $this->template->page_css([
 ----
 
 ### Add Custom Page JS
+
+if you have a specific custom js for a page, you can load it by using this method
 
 ```php
 $this->template->page_js("assets/dist/js/pages/demo.js");
