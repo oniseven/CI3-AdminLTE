@@ -72,11 +72,14 @@ But I suggest you to create your own template library file base on your Admin Te
 # Installations
 
 - Clone this to your php server, you could use XAMPP or any kind of PHP server.
-- Import the demo database `demo_database_cignadlte.sql` to MySQL database server that you have.
-- Rename `.env-test` in `application` folder to `.env`, and populate the data according to your database config.
 - In cli/bash run `composer install` it will install dependency from `composer.json`.
+- Create database for example `db_cignadlte`.
+- Rename `.env-test` in `application` folder to `.env`, and populate the data according to your database config.
+- Run migration by accessing <http://localhost/yourappname/migrate> or using cli `php index.php migrate`
+- If some how the migration is failed, you can also import the database using sql file that you find in root folder as `demo_db_cignadlte.sql`
 - That's it. You are good to go, just open your browser and go to <http://localhost/yourappname>.
 - Have fun.
+
 
 # Template Library Usage
 
