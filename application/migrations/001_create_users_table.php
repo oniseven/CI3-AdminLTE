@@ -45,6 +45,9 @@ class Migration_Create_users_table extends CI_Migration {
 
     // Create the table
     $this->dbforge->create_table($this->tableName);
+
+    // insert dummy data user
+    $this->db->query('insert into `users`(`id`,`fullname`,`username`,`email`,`password`,`is_active`) values (1,"Admin","admin","admin@gmail.com","$2y$10$hVcNMriYZalBYwJYSMMMDO1rIBCcIFDnm5AelEG9S/imD8bBxzDNq",1)');
   }
 
   public function down() {
