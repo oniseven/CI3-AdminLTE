@@ -49,9 +49,9 @@ The journey began when I sought the optimal method to seamlessly integrate an Ad
 
 In this repo I use `CodeIgniter 3.1.13` and `AdminLTE 3.2.0` for the admin template.
 
-So if you are looking for a ready to use CodeIgniter 3 with AdminLTE Template, feel free to clone this repo and tweak it according to your needs. 
+So if you are looking for a ready to use CodeIgniter 3 with AdminLTE Template, feel free to clone this repo and tweak it according to your needs. Also, not all example page of AdminLTE is available in here, because that is not the point of this repo.
 
-This repo also come with `Datatables` example usage and different concept of using `Model` and `Core Model` and also `Dynamic Menus`. That might gonna need a tweak here and there depend on your personal preference.
+This repo come with `Datatables` example usage and different concept of using `Model` and `Core Model` and also `Dynamic Menus`. That might gonna need a tweak here and there depend on your personal preference.
 
 # Can I use it with other Admin Template?
 
@@ -80,7 +80,6 @@ But I suggest you to create your own template library file base on your Admin Te
 - That's it. You are good to go, just open your browser and go to <http://localhost/yourappname>.
 - Have fun.
 
-
 # Template Library Usage
 
 ### Details
@@ -90,7 +89,7 @@ But I suggest you to create your own template library file base on your Admin Te
 ### Load the template
 
 This function has 2 parameter,
-- `$view` (* mandatory): Its your view page files so its mandatory otherwise error will occurred
+- `$view` (* mandatory): Its your view page file so its mandatory otherwise error will occurred
 - `$data`: Data for your page
 
 To load the template with your view content you could just do
