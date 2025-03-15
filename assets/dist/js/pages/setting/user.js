@@ -274,12 +274,19 @@ const userJs = (() => {
     })
   }
 
+  const handleModal = () => {
+		userModal.on("hide.bs.modal", () => {
+			userJs.resetForm();
+		});
+	}
+
   return {
     init: function() {
       gridUser = handleDataTable();
       handleTab();
       handleSelect2();
       handleForm();
+      handleModal();
     },
     resetForm: function() {
       $("#user-id").val("");
